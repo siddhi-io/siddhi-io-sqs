@@ -1,8 +1,20 @@
 ﻿siddhi-io-sqs
 ======================================
 
+The **siddhi-io-sqs extension** is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> 
+that used to receive and publish events via AWS SQS Service. This extension allows users to subscribe to a SQS queue 
+and receive/publish SQS messages.
+
+Find some useful links below:
+
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs">Source code</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/releases">Releases</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/issues">Issue tracker</a>
+
+## Latest API Docs 
 
 
+## How to use
 
 
 **Using the extension in <a target="_blank" href="https://github.com/wso2/product-sp">WSO2 Stream Processor</a>**
