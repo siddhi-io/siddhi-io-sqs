@@ -99,11 +99,11 @@ import java.util.concurrent.TimeUnit;
                         defaultValue = "" + SQSConstants.DEFAULT_VISIBILITY_TIMEOUT
                 ),
                 @Parameter(
-                        name = SQSConstants.PURGE_MESSAGES_NAME,
+                        name = SQSConstants.DELETE_MESSAGES_NAME,
                         description = "Should the message be deleted from the queue after consuming it.",
                         type = DataType.BOOL,
                         optional = true,
-                        defaultValue = "" + SQSConstants.PURGE_MESSAGES_NAME
+                        defaultValue = "" + SQSConstants.DELETE_MESSAGES_NAME
                 ),
                 @Parameter(
                         name = SQSConstants.DELETE_RETRY_INTERVAL_NAME,

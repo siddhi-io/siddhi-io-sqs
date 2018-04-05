@@ -55,35 +55,28 @@ public class SQSSourceConfig extends SQSConfig {
                     super.setRegion(optionHolder.validateAndGetStaticValue(key));
                     break;
                 case SQSConstants.WAITING_TIME_NAME:
-                    this.setWaitTime(getIntegerOptionValue(optionHolder, key, SQSConstants.DEFAULT_WAITING_TIME));
+                    this.waitTime = getIntegerOptionValue(optionHolder, key);
                     break;
                 case SQSConstants.VISIBILITY_TIMEOUT_NAME:
-                    this.setVisibilityTimeout(
-                            getIntegerOptionValue(optionHolder, key, SQSConstants.DEFAULT_VISIBILITY_TIMEOUT));
+                    this.visibilityTimeout = getIntegerOptionValue(optionHolder, key);
                     break;
                 case SQSConstants.MAX_NUMBER_OF_MESSAGES_NAME:
-                    this.setMaxNumberOfMessages(
-                            getIntegerOptionValue(optionHolder, key, SQSConstants.DEFAULT_MAX_NUMBER_OF_MESSAGES));
+                    this.maxNumberOfMessages = getIntegerOptionValue(optionHolder, key);
                     break;
-                case SQSConstants.PURGE_MESSAGES_NAME:
-                    this.setDeleteAfterConsume(
-                            getBooleanValue(optionHolder, key, SQSConstants.DEFAULT_DELETE_AFTER_CONSUME));
+                case SQSConstants.DELETE_MESSAGES_NAME:
+                    this.deleteAfterConsume = getBooleanValue(optionHolder, key);
                     break;
                 case SQSConstants.DELETE_RETRY_INTERVAL_NAME:
-                    this.setRetryInterval(
-                            getIntegerOptionValue(optionHolder, key, SQSConstants.DEFAULT_RETRY_INTERVAL));
+                    this.retryInterval = getIntegerOptionValue(optionHolder, key);
                     break;
                 case SQSConstants.MAX_NUMBER_OF_DELETE_RETRY_ATTEMPTS_NAME:
-                    this.setRetryCountLimit(
-                            getIntegerOptionValue(optionHolder, key, SQSConstants.DEFAULT_RETRY_COUNT_LIMIT));
+                    this.retryCountLimit = getIntegerOptionValue(optionHolder, key);
                     break;
                 case SQSConstants.POLLING_INTERVAL_NAME:
-                    this.setPollingInterval(
-                            getIntegerOptionValue(optionHolder, key, SQSConstants.DEFAULT_POLLING_INTERVAL));
+                    this.pollingInterval = getIntegerOptionValue(optionHolder, key);
                     break;
                 case SQSConstants.PARALLEL_CONSUMERS_NAME:
-                    this.setThreadPoolSize(
-                            getIntegerOptionValue(optionHolder, key, SQSConstants.DEFAULT_PARALLEL_CONSUMERS));
+                    this.threadPoolSize = getIntegerOptionValue(optionHolder, key);
                     break;
                 default:
                     // not a supported option.
@@ -100,63 +93,32 @@ public class SQSSourceConfig extends SQSConfig {
         return waitTime;
     }
 
-    public void setWaitTime(int waitTime) {
-        this.waitTime = waitTime;
-    }
-
     public int getVisibilityTimeout() {
         return visibilityTimeout;
-    }
-
-    public void setVisibilityTimeout(int visibilityTimeout) {
-        this.visibilityTimeout = visibilityTimeout;
     }
 
     public int getMaxNumberOfMessages() {
         return maxNumberOfMessages;
     }
 
-    public void setMaxNumberOfMessages(int maxNumberOfMessages) {
-        this.maxNumberOfMessages = maxNumberOfMessages;
-    }
-
     public boolean deleteAfterConsume() {
         return deleteAfterConsume;
-    }
-
-    public void setDeleteAfterConsume(boolean deleteAfterConsume) {
-        this.deleteAfterConsume = deleteAfterConsume;
     }
 
     public int getRetryCountLimit() {
         return retryCountLimit;
     }
 
-    public void setRetryCountLimit(int retryCountLimit) {
-        this.retryCountLimit = retryCountLimit;
-    }
-
     public int getRetryInterval() {
         return retryInterval;
-    }
-
-    public void setRetryInterval(int retryInterval) {
-        this.retryInterval = retryInterval;
     }
 
     public int getPollingInterval() {
         return pollingInterval;
     }
 
-    public void setPollingInterval(int pollingInterval) {
-        this.pollingInterval = pollingInterval;
-    }
-
     public int getThreadPoolSize() {
         return threadPoolSize;
     }
 
-    public void setThreadPoolSize(int threadPoolSize) {
-        this.threadPoolSize = threadPoolSize;
-    }
 }

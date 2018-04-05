@@ -32,7 +32,7 @@ public class SQSConstants {
     public static final String WAITING_TIME_NAME = "waiting.time";
     public static final String MAX_NUMBER_OF_MESSAGES_NAME = "max.number.of.messages";
     public static final String VISIBILITY_TIMEOUT_NAME = "visibility.timeout";
-    public static final String PURGE_MESSAGES_NAME = "purge.messages";
+    public static final String DELETE_MESSAGES_NAME = "delete.messages";
     public static final String DELETE_RETRY_INTERVAL_NAME = "delete.retry.interval";
     public static final String MAX_NUMBER_OF_DELETE_RETRY_ATTEMPTS_NAME = "max.number.of.delete.retry.attempts";
     public static final String PARALLEL_CONSUMERS_NAME = "number.of.parallel.consumers";

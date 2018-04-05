@@ -64,18 +64,18 @@ public class SQSConfig {
         this.region = region;
     }
 
-    protected int getIntegerOptionValue(OptionHolder optionHolder, String key, int defaultValue) {
+    protected int getIntegerOptionValue(OptionHolder optionHolder, String key) {
         try {
-            return Integer.parseInt(optionHolder.validateAndGetStaticValue(key, String.valueOf(defaultValue)));
+            return Integer.parseInt(optionHolder.validateAndGetStaticValue(key));
         } catch (InputMismatchException e) {
             throw new SiddhiAppValidationException(
                     String.format("Option value provided for attribute %s is not of type Integer.", key), e);
         }
     }
 
-    protected boolean getBooleanValue(OptionHolder optionHolder, String key, boolean defaultValue) {
+    protected boolean getBooleanValue(OptionHolder optionHolder, String key) {
         try {
-            return Boolean.parseBoolean(optionHolder.validateAndGetStaticValue(key, String.valueOf(defaultValue)));
+            return Boolean.parseBoolean(optionHolder.validateAndGetStaticValue(key));
         } catch (InputMismatchException e) {
             throw new SiddhiAppValidationException(
                     String.format("Option value provided for attribute %s is not of type Boolean.", key), e);

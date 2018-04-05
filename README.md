@@ -29,8 +29,8 @@ Find some useful links below:
 
 ```
      <dependency>
-        <groupId>org.wso2.extension.siddhi.io.</groupId>
-        <artifactId>siddhi-io-</artifactId>
+        <groupId>org.wso2.extension.siddhi.io.sqs</groupId>
+        <artifactId>siddhi-io-sqs</artifactId>
         <version>x.x.x</version>
      </dependency>
 ```

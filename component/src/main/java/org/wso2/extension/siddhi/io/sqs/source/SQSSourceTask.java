@@ -70,14 +70,10 @@ public class SQSSourceTask implements Runnable {
                 }
             }
         } catch (AbortedException e) {
-            /*
-             * Exception is thrown when stopping the queue via the Future call.
-             */
+            // Exception is thrown when stopping the queue via the Future call.
             logger.info("Executor thread aborted.");
         } catch (SdkClientException e) {
-            /*
-             * Exception is thrown when there is a limit exceed in the configuration provided.
-             */
+            // Exception is thrown when there is a limit exceed in the configuration provided.
             logger.error("Error occurred while trying to receive messages from the queue. Hence waiting for " +
                     "polling cycle.\n" + e.getMessage(), e);
         }
@@ -110,6 +106,7 @@ public class SQSSourceTask implements Runnable {
             try {
                 Thread.sleep(sourceConfig.getRetryInterval());
             } catch (InterruptedException e) {
+                logger.info("SQS source thread got interrupted during delete retry.");
                 Thread.currentThread().interrupt();
             }
         }

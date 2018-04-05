@@ -24,9 +24,6 @@ import static org.mockito.Mockito.when;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(SQSSourceTask.class)
 public class TestCaseOfSQSSource {
-    // If you will know about this related testcase,
-    //refer https://github.com/wso2-extensions/siddhi-io-file/blob/master/component/src/test
-
 
     /**
      * For this Test case Follow the following instructions.
