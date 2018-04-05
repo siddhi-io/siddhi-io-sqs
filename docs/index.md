@@ -1,4 +1,4 @@
-﻿siddhi-io-sqs
+siddhi-io-sqs
 ======================================
 
 The **siddhi-io-sqs extension** is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> 
