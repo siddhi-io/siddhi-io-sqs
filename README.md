@@ -11,6 +11,12 @@ Find some useful links below:
 * <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/releases">Releases</a>
 * <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/issues">Issue tracker</a>
 
+## Jenkins Build Status
+
+|  Siddhi Branch | Jenkins Build Status |
+| :---------------------------------------- |:---------------------------------------
+| master         | [![Build Status](https://wso2.org/jenkins/view/wso2-dependencies/job/siddhi/job/siddhi-io-sqs/badge/icon)](https://wso2.org/jenkins/view/wso2-dependencies/job/siddhi/job/siddhi-io-sqs)|
+
 ## Latest API Docs 
 
 
