@@ -1,4 +1,4 @@
-# API Docs - v1.0.0-SNAPSHOT
+# API Docs - v1.0.0
 
 ## Sink
 
@@ -22,11 +22,11 @@
 
 ### sqs *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#source">(Source)</a>*
 
-<p style="word-wrap: break-word">SQS source allows users to subscribe and consume messages from a AWS SQS Queue. It has the ability to receive Binary, Number and Text messages</p>
+<p style="word-wrap: break-word">SQS source allows users to subscribe and consume messages from a AWS SQS Queue. It has the ability to receive Text messages</p>
 
 <span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span>
 ```
-@source(type="sqs", queue="<STRING>", access.key="<STRING>", secret.key="<STRING>", region="<STRING>", polling.interval="<INT>", waiting.time="<INT>", max.number.of.messages="<INT>", visibility.timeout="<INT>", purge.messages="<BOOL>", delete.retry.interval="<INT>", max.number.of.delete.retry.attempts="<INT>", number.of.parallel.consumers="<INT>", @map(...)))
+@source(type="sqs", queue="<STRING>", access.key="<STRING>", secret.key="<STRING>", region="<STRING>", polling.interval="<INT>", waiting.time="<INT>", max.number.of.messages="<INT>", visibility.timeout="<INT>", delete.messages="<BOOL>", delete.retry.interval="<INT>", max.number.of.delete.retry.attempts="<INT>", number.of.parallel.consumers="<INT>", @map(...)))
 ```
 
 <span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
@@ -104,9 +104,9 @@
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
-        <td style="vertical-align: top">purge.messages</td>
+        <td style="vertical-align: top">delete.messages</td>
         <td style="vertical-align: top; word-wrap: break-word">Should the message be deleted from the queue after consuming it.</td>
-        <td style="vertical-align: top">purge.messages</td>
+        <td style="vertical-align: top">delete.messages</td>
         <td style="vertical-align: top">BOOL</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>

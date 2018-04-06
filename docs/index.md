@@ -1,4 +1,4 @@
-siddhi-io-sqs
+?siddhi-io-sqs
 ======================================
 
 The **siddhi-io-sqs extension** is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> 
@@ -19,6 +19,7 @@ Find some useful links below:
 
 ## Latest API Docs 
 
+Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/1.0.0">1.0.0</a>.
 
 ## How to use
 
