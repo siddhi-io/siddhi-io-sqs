@@ -56,13 +56,19 @@ import java.util.concurrent.TimeUnit;
                 ),
                 @Parameter(
                         name = SQSConstants.ACCESS_KEY_NAME,
-                        description = "Access Key for the Amazon Web Services",
-                        type = DataType.STRING
+                        description = "Access Key for the Amazon Web Services. (This is a mandatory field and should " +
+                                "be provided either in the deployment.yml or in the source definition itself)",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "null"
                 ),
                 @Parameter(
                         name = SQSConstants.SECRET_KEY_NAME,
-                        description = "Secret Key of the Amazon User",
-                        type = DataType.STRING
+                        description = "Secret Key of the Amazon User. (This is a mandatory field and should " +
+                                "be provided either in the deployment.yml or in the source definition itself)",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "null"
                 ),
                 @Parameter(
                         name = SQSConstants.REGION_NAME,
@@ -174,6 +180,15 @@ public class SQSSource extends Source {
                      String[] requestedTransportPropertyNames, ConfigReader configReader,
                      SiddhiAppContext siddhiAppContext) {
         this.sourceConfig = new SQSSourceConfig(optionHolder, requestedTransportPropertyNames);
+
+        if (this.sourceConfig.getAccessKey() == null) {
+            this.sourceConfig.setAccessKey(configReader.readConfig(SQSConstants.ACCESS_KEY_NAME, null));
+        }
+
+        if (this.sourceConfig.getSecretKey() == null) {
+            this.sourceConfig.setSecretKey(configReader.readConfig(SQSConstants.SECRET_KEY_NAME, null));
+        }
+
         scheduledExecutorService = siddhiAppContext.getScheduledExecutorService();
         this.sourceEventListener = sourceEventListener;
     }
