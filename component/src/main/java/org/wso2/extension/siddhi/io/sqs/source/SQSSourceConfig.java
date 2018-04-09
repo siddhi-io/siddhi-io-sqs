@@ -42,7 +42,7 @@ public class SQSSourceConfig extends SQSConfig {
         this.requestedTransportProperties = requestedTransportProperties.clone();
         optionHolder.getStaticOptionsKeys().forEach(key -> {
             switch (key.toLowerCase()) {
-                case SQSConstants.QUEUE_NAME:
+                case SQSConstants.QUEUE_URL_NAME:
                     super.setQueueUrl(optionHolder.validateAndGetStaticValue(key));
                     break;
                 case SQSConstants.ACCESS_KEY_NAME:

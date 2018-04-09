@@ -46,11 +46,11 @@ import java.util.concurrent.TimeUnit;
 @Extension(
         name = "sqs",
         namespace = "source",
-        description = "SQS source allows users to subscribe and consume messages from a AWS SQS Queue. It has the" +
+        description = "SQS source allows users to connect and consume messages from a AWS SQS Queue. It has the" +
                 " ability to receive Text messages",
         parameters = {
                 @Parameter(
-                        name = SQSConstants.QUEUE_NAME,
+                        name = SQSConstants.QUEUE_URL_NAME,
                         description = "Queue name which SQS Source should subscribe to",
                         type = DataType.STRING
                 ),
@@ -274,7 +274,7 @@ public class SQSSource extends Source {
     private void startPolling() {
         for (int i = 0; i < sourceConfig.getThreadPoolSize(); i++) {
             ScheduledFuture<?> future = scheduledExecutorService
-                    .scheduleAtFixedRate(new SQSBuilder(sourceConfig, sourceEventListener).buildSourceTask(),
+                    .scheduleAtFixedRate(new SQSBuilder(sourceConfig).buildSourceTask(sourceEventListener),
                             0, sourceConfig.getPollingInterval(), TimeUnit.MILLISECONDS);
             futures.add(future);
         }

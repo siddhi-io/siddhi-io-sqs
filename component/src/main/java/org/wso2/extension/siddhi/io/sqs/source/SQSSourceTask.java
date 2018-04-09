@@ -26,7 +26,6 @@ import com.amazonaws.services.sqs.model.DeleteMessageResult;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import org.apache.log4j.Logger;
-import org.wso2.extension.siddhi.io.sqs.util.SQSConfig;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
@@ -44,7 +43,7 @@ public class SQSSourceTask implements Runnable {
     private SQSSourceConfig sourceConfig;
     private String[] reqTransportProperties;
 
-    public SQSSourceTask(SQSConfig sqsConfig, AmazonSQS amazonSQS, SourceEventListener sourceEventListener) {
+    public SQSSourceTask(SQSSourceConfig sqsConfig, AmazonSQS amazonSQS, SourceEventListener sourceEventListener) {
         this.sourceEventListener = sourceEventListener;
         this.amazonSQS = amazonSQS;
         initializeRequest(sqsConfig);
@@ -80,10 +79,8 @@ public class SQSSourceTask implements Runnable {
 
     }
 
-    private void initializeRequest(SQSConfig sqsConfig) {
-        if (sqsConfig instanceof SQSSourceConfig) {
-            this.sourceConfig = (SQSSourceConfig) sqsConfig;
-        }
+    private void initializeRequest(SQSSourceConfig sqsConfig) {
+        this.sourceConfig = sqsConfig;
         this.reqTransportProperties = sourceConfig.getRequestedTransportProperties();
 
         this.messageRequest = new ReceiveMessageRequest()
