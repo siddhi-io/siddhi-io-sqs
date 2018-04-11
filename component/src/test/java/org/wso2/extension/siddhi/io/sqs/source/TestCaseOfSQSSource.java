@@ -25,46 +25,6 @@ import static org.mockito.Mockito.when;
 @PrepareForTest(SQSSourceTask.class)
 public class TestCaseOfSQSSource {
 
-    /**
-     * For this Test case Follow the following instructions.
-     * 1) Create any type of queue in a Service
-     * 2) Replace the queue url, access key, secret key in proper places with the ones relevant to the queue.
-     * 3) Uncomment and run the Test.
-     */
-//    @Test
-//    public void testSQSSourceTask() throws InterruptedException {
-//        String inStreamDef = "@source(type='sqs'," +
-//                "queue='<queue url>'," +
-//                "access.key='<access_key>'," +
-//                "secret.key='<secret_key>'," +
-//                "region='us-east-2'," +
-//                "polling.interval='5000'," +
-//                "max.number.of.messages='10'," +
-//                "number.of.parallel.consumers='1'," +
-//                "purge.messages='true'," +
-//                "waiting.time='2'," +
-//                "visibility.timeout='30'," +
-//                "delete.retry.interval='1000'," +
-//                "max.number.of.delete.retry.attempts='10'," +
-//                "@map(type='xml',enclosing.element=\"//events\"," +
-//                "@attributes(symbol='symbol', message_id='trp:MESSAGE_ID') ))" +
-//                "define stream inStream (symbol string, message_id string);";
-//
-//        String query = "@info(name='query1')" +
-//                "from inStream select * insert into outStream;";
-//
-//        SiddhiAppRuntime siddhiAppRuntime = new SiddhiManager().createSiddhiAppRuntime(inStreamDef + query);
-//
-//        siddhiAppRuntime.addCallback("query1", new QueryCallback() {
-//            @Override
-//            public void receive(long timestamp, Event[] inEvents, Event[] removeEvents) {
-//                EventPrinter.print(timestamp, inEvents, removeEvents);
-//            }
-//        });
-//
-//        siddhiAppRuntime.start();
-//    }
-
 
     @Test
     public void testDeleteMessageFromQueueMethod() throws Exception {
@@ -124,7 +84,7 @@ public class TestCaseOfSQSSource {
         String[] response = Whitebox
                 .invokeMethod(sqsSourceTask, "getTransportProperties", message, transportProperties);
 
-        Assert.assertEquals(new String[]{"message_id_provided"}, response);
+        Assert.assertEquals(new String[] {"message_id_provided"}, response);
     }
 
 
