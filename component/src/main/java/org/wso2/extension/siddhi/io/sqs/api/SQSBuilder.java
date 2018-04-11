@@ -23,10 +23,14 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import org.wso2.extension.siddhi.io.sqs.sink.SQSMessagePublisher;
+import org.wso2.extension.siddhi.io.sqs.sink.SQSSinkConfig;
+import org.wso2.extension.siddhi.io.sqs.source.SQSSourceConfig;
 import org.wso2.extension.siddhi.io.sqs.source.SQSSourceTask;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConfig;
 import org.wso2.siddhi.core.exception.SiddhiAppRuntimeException;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
+import org.wso2.siddhi.core.util.transport.OptionHolder;
 
 /**
  * Class to provide the executable tasks for the Source and Sink.
@@ -35,11 +39,9 @@ import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 public class SQSBuilder {
     private AmazonSQS amazonSQS;
     private SQSConfig sqsConfig;
-    private SourceEventListener sourceEventListener;
 
-    public SQSBuilder(SQSConfig sqsConfig, SourceEventListener sourceEventListener) {
+    public SQSBuilder(SQSConfig sqsConfig) {
         this.sqsConfig = sqsConfig;
-        this.sourceEventListener = sourceEventListener;
         BasicAWSCredentials credentials = new BasicAWSCredentials(sqsConfig.getAccessKey(), sqsConfig.getSecretKey());
 
         try {
@@ -49,12 +51,24 @@ public class SQSBuilder {
                     .build();
         } catch (SdkClientException e) {
             throw new SiddhiAppRuntimeException(
-                    "Failed to create SQS receiver due to invalid configuration. " + e.getMessage(), e);
+                    "Failed to create SQS client due to invalid configuration. " + e.getMessage(), e);
         }
 
     }
 
-    public SQSSourceTask buildSourceTask() {
-        return new SQSSourceTask(sqsConfig, amazonSQS, sourceEventListener);
+    public SQSSourceTask buildSourceTask(SourceEventListener sourceEventListener) {
+        if (sqsConfig instanceof SQSSourceConfig) {
+            return new SQSSourceTask((SQSSourceConfig) sqsConfig, amazonSQS, sourceEventListener);
+        }
+
+        return null;
+    }
+
+    public SQSMessagePublisher buildSinkPublisher(OptionHolder optionHolder, boolean isFIFO) {
+        if (sqsConfig instanceof SQSSinkConfig) {
+            return new SQSMessagePublisher((SQSSinkConfig) sqsConfig, amazonSQS, optionHolder, isFIFO);
+        }
+
+        return null;
     }
 }

@@ -18,9 +18,12 @@
 
 package org.wso2.extension.siddhi.io.sqs.sink;
 
-import org.apache.log4j.Logger;
+import org.wso2.extension.siddhi.io.sqs.api.SQSBuilder;
+import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
+import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
 import org.wso2.siddhi.core.stream.output.sink.Sink;
@@ -28,47 +31,85 @@ import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.core.util.transport.DynamicOptions;
 import org.wso2.siddhi.core.util.transport.OptionHolder;
 import org.wso2.siddhi.query.api.definition.StreamDefinition;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.Map;
 
 /**
- * This is a sample class-level comment, explaining what the extension class does.
- */
-
-/**
- * Annotation of Siddhi Extension.
- * <pre><code>
- * eg:-
- * {@literal @}Extension(
- * name = "The name of the extension",
- * namespace = "The namespace of the extension",
- * description = "The description of the extension (optional).",
- * //Sink configurations
- * parameters = {
- * {@literal @}Parameter(name = "The name of the first parameter", type = "Supprted parameter types.
- *                              eg:{DataType.STRING,DataType.INT, DataType.LONG etc},dynamic=false ,optinal=true/false ,
- *                              if optional =true then assign default value according the type")
- *   System parameter is used to define common extension wide
- *              },
- * examples = {
- * {@literal @}Example({"Example of the first CustomExtension contain syntax and description.Here,
- *                      Syntax describe default mapping for SourceMapper and description describes
- *                      the output of according this syntax},
- *                      }
- * </code></pre>
+ * SQS Sink Extension
  */
 
 @Extension(
         name = "sqs",
         namespace = "sink",
-        description = " ",
+        description = "SQS sink allows users to connect and publish messages to an AWS SQS Queue. It has the" +
+                " ability to only publish Text messages",
         parameters = {
-
+                @Parameter(
+                        name = SQSConstants.QUEUE_URL_NAME,
+                        description = "Queue url which SQS Sink should connect to",
+                        type = DataType.STRING
+                ),
+                @Parameter(
+                        name = SQSConstants.ACCESS_KEY_NAME,
+                        description = "Access Key for the Amazon Web Services. (This is a mandatory field and should " +
+                                "be provided either in the deployment.yml or in the sink definition itself)",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "none"
+                ),
+                @Parameter(
+                        name = SQSConstants.SECRET_KEY_NAME,
+                        description = "Secret Key of the Amazon User. (This is a mandatory field and should " +
+                                "be provided either in the deployment.yml or in the sink definition itself)",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "none"
+                ),
+                @Parameter(
+                        name = SQSConstants.REGION_NAME,
+                        description = "Amazon Web Service Region",
+                        type = DataType.STRING
+                ),
+                @Parameter(
+                        name = SQSConstants.MESSAGE_GROUP_ID_NAME,
+                        description = "ID of the group that the message belong to(only applicable for FIFO Queues)",
+                        type = DataType.STRING,
+                        optional = true,
+                        dynamic = true,
+                        defaultValue = "null"
+                ),
+                @Parameter(
+                        name = SQSConstants.DEDUPLICATION_ID_NAME,
+                        description = "ID by which a FIFO queue identifies the duplication in the queue(only " +
+                                "applicable for FIFO queues)",
+                        type = DataType.STRING,
+                        optional = true,
+                        dynamic = true,
+                        defaultValue = "null"
+                ),
+                @Parameter(
+                        name = SQSConstants.DELAY_INTERVAL_NAME,
+                        description = "Time in seconds for how long the message remain in the queue until it is " +
+                                "available for the consumers to consume.",
+                        type = DataType.INT,
+                        optional = true,
+                        defaultValue = "" + SQSConstants.DEFAULT_DELAY_INTERVAL
+                )
         },
         examples = {
                 @Example(
-                        syntax = " ",
-                        description = " "
+                        syntax = "@sink(type='sqs'," +
+                                "queue='<queue_url>'," +
+                                "access.key='<aws_access_key>'," +
+                                "secret.key='<aws_secret_key>'," +
+                                "region='<region>'," +
+                                "delay.interval='5'," +
+                                "deduplication.id='{{deduplicationID}}'," +
+                                "message.group.id='charuka',@map(type='xml') )" +
+                                "define stream outStream(symbol string, deduplicationID string);",
+                        description = "Following Example shows how to define a SQS sink to publish messages to " +
+                                "the service"
                 )
         }
 )
@@ -76,7 +117,9 @@ import java.util.Map;
 // for more information refer https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sinks
 
 public class SQSSink extends Sink {
-    private static final Logger log = Logger.getLogger(SQSSink.class);
+    private SQSSinkConfig sinkConfig;
+    private SQSMessagePublisher sqsMessagePublisher;
+    private OptionHolder optionHolder;
 
     /**
      * Returns the list of classes which this sink can consume.
@@ -88,7 +131,7 @@ public class SQSSink extends Sink {
      */
     @Override
     public Class[] getSupportedInputEventClasses() {
-        return new Class[]{String.class};
+        return new Class[] {String.class};
     }
 
     /**
@@ -99,7 +142,7 @@ public class SQSSink extends Sink {
      */
     @Override
     public String[] getSupportedDynamicOptions() {
-        return new String[]{};
+        return new String[] {SQSConstants.MESSAGE_GROUP_ID_NAME, SQSConstants.DEDUPLICATION_ID_NAME};
     }
 
     /**
@@ -116,7 +159,23 @@ public class SQSSink extends Sink {
     @Override
     protected void init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
                         SiddhiAppContext siddhiAppContext) {
+        this.sinkConfig = new SQSSinkConfig(optionHolder);
+        this.optionHolder = optionHolder;
+        this.sqsMessagePublisher = null;
 
+        if (this.sinkConfig.getAccessKey() == null || sinkConfig.getAccessKey().isEmpty()) {
+            this.sinkConfig.setAccessKey(configReader.readConfig(SQSConstants.ACCESS_KEY_NAME, null));
+        }
+
+        if (this.sinkConfig.getSecretKey() == null || sinkConfig.getSecretKey().isEmpty()) {
+            this.sinkConfig.setSecretKey(configReader.readConfig(SQSConstants.SECRET_KEY_NAME, null));
+        }
+
+        if (sinkConfig.getAccessKey() == null || sinkConfig.getSecretKey() == null ||
+                sinkConfig.getAccessKey().isEmpty() || sinkConfig.getSecretKey().isEmpty()) {
+            throw new SiddhiAppValidationException("Access key and Secret key are mandatory parameters for" +
+                    " the SQS client");
+        }
     }
 
     /**
@@ -129,7 +188,7 @@ public class SQSSink extends Sink {
      */
     @Override
     public void publish(Object payload, DynamicOptions dynamicOptions) throws ConnectionUnavailableException {
-
+        sqsMessagePublisher.sendMessageRequest(payload, dynamicOptions);
     }
 
     /**
@@ -141,7 +200,8 @@ public class SQSSink extends Sink {
      */
     @Override
     public void connect() throws ConnectionUnavailableException {
-
+        sqsMessagePublisher = new SQSBuilder(sinkConfig)
+                .buildSinkPublisher(optionHolder, checkFIFO(sinkConfig.getQueueUrl()));
     }
 
     /**
@@ -150,7 +210,7 @@ public class SQSSink extends Sink {
      */
     @Override
     public void disconnect() {
-
+        // client uses a rest api
     }
 
     /**
@@ -159,7 +219,7 @@ public class SQSSink extends Sink {
      */
     @Override
     public void destroy() {
-
+        // client uses a rest api
     }
 
     /**
@@ -183,6 +243,12 @@ public class SQSSink extends Sink {
      */
     @Override
     public void restoreState(Map<String, Object> map) {
+        // no state.
+    }
+
+    private boolean checkFIFO(String queueURL) {
+        return (queueURL.endsWith(".fifo") ||
+                queueURL.substring(0, queueURL.length() - 1).endsWith(".fifo"));
     }
 }
 

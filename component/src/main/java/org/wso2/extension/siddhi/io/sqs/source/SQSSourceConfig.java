@@ -42,7 +42,7 @@ public class SQSSourceConfig extends SQSConfig {
         this.requestedTransportProperties = requestedTransportProperties.clone();
         optionHolder.getStaticOptionsKeys().forEach(key -> {
             switch (key.toLowerCase()) {
-                case SQSConstants.QUEUE_NAME:
+                case SQSConstants.QUEUE_URL_NAME:
                     super.setQueueUrl(optionHolder.validateAndGetStaticValue(key));
                     break;
                 case SQSConstants.ACCESS_KEY_NAME:
@@ -54,7 +54,7 @@ public class SQSSourceConfig extends SQSConfig {
                 case SQSConstants.REGION_NAME:
                     super.setRegion(optionHolder.validateAndGetStaticValue(key));
                     break;
-                case SQSConstants.WAITING_TIME_NAME:
+                case SQSConstants.WAIT_TIME_NAME:
                     this.waitTime = getIntegerOptionValue(optionHolder, key);
                     break;
                 case SQSConstants.VISIBILITY_TIMEOUT_NAME:

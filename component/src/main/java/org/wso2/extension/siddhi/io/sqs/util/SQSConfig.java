@@ -36,7 +36,7 @@ public class SQSConfig {
         return accessKey;
     }
 
-    protected void setAccessKey(String accessKey) {
+    public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
     }
 
@@ -44,7 +44,7 @@ public class SQSConfig {
         return secretKey;
     }
 
-    protected void setSecretKey(String secretKey) {
+    public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
 

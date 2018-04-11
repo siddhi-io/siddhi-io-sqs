@@ -31,6 +31,7 @@ import org.wso2.siddhi.core.stream.input.source.Source;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.core.util.transport.OptionHolder;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,23 +47,29 @@ import java.util.concurrent.TimeUnit;
 @Extension(
         name = "sqs",
         namespace = "source",
-        description = "SQS source allows users to subscribe and consume messages from a AWS SQS Queue. It has the" +
+        description = "SQS source allows users to connect and consume messages from a AWS SQS Queue. It has the" +
                 " ability to receive Text messages",
         parameters = {
                 @Parameter(
-                        name = SQSConstants.QUEUE_NAME,
+                        name = SQSConstants.QUEUE_URL_NAME,
                         description = "Queue name which SQS Source should subscribe to",
                         type = DataType.STRING
                 ),
                 @Parameter(
                         name = SQSConstants.ACCESS_KEY_NAME,
-                        description = "Access Key for the Amazon Web Services",
-                        type = DataType.STRING
+                        description = "Access Key for the Amazon Web Services. (This is a mandatory field and should " +
+                                "be provided either in the deployment.yml or in the source definition itself)",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "null"
                 ),
                 @Parameter(
                         name = SQSConstants.SECRET_KEY_NAME,
-                        description = "Secret Key of the Amazon User",
-                        type = DataType.STRING
+                        description = "Secret Key of the Amazon User. (This is a mandatory field and should " +
+                                "be provided either in the deployment.yml or in the source definition itself)",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "null"
                 ),
                 @Parameter(
                         name = SQSConstants.REGION_NAME,
@@ -75,7 +82,7 @@ import java.util.concurrent.TimeUnit;
                         type = DataType.INT
                 ),
                 @Parameter(
-                        name = SQSConstants.WAITING_TIME_NAME,
+                        name = SQSConstants.WAIT_TIME_NAME,
                         description = "Maximum amount (in seconds) that a polling call will wait for a message to " +
                                 "become available in the queue",
                         type = DataType.INT,
@@ -138,7 +145,7 @@ import java.util.concurrent.TimeUnit;
                                 "max.number.of.messages='10'," +
                                 "number.of.parallel.consumers='1'," +
                                 "purge.messages='true'," +
-                                "waiting.time='2'," +
+                                "wait.time='2'," +
                                 "visibility.timeout='30'," +
                                 "delete.retry.interval='1000'," +
                                 "max.number.of.delete.retry.attempts='10'," +
@@ -174,6 +181,21 @@ public class SQSSource extends Source {
                      String[] requestedTransportPropertyNames, ConfigReader configReader,
                      SiddhiAppContext siddhiAppContext) {
         this.sourceConfig = new SQSSourceConfig(optionHolder, requestedTransportPropertyNames);
+
+        if (this.sourceConfig.getAccessKey() == null  || sourceConfig.getAccessKey().isEmpty()) {
+            this.sourceConfig.setAccessKey(configReader.readConfig(SQSConstants.ACCESS_KEY_NAME, null));
+        }
+
+        if (this.sourceConfig.getSecretKey() == null || sourceConfig.getAccessKey().isEmpty()) {
+            this.sourceConfig.setSecretKey(configReader.readConfig(SQSConstants.SECRET_KEY_NAME, null));
+        }
+
+        if (sourceConfig.getAccessKey() == null || sourceConfig.getSecretKey() == null ||
+                sourceConfig.getAccessKey().isEmpty() || sourceConfig.getSecretKey().isEmpty()) {
+            throw new SiddhiAppValidationException("Access key and Secret key are mandatory parameters" +
+                    " for the SQS client");
+        }
+
         scheduledExecutorService = siddhiAppContext.getScheduledExecutorService();
         this.sourceEventListener = sourceEventListener;
     }
@@ -186,7 +208,7 @@ public class SQSSource extends Source {
      */
     @Override
     public Class[] getOutputEventClasses() {
-        return new Class[]{String.class}; // SQS message body supports only text.
+        return new Class[] {String.class}; // SQS message body supports only text.
     }
 
     /**
@@ -259,7 +281,7 @@ public class SQSSource extends Source {
     private void startPolling() {
         for (int i = 0; i < sourceConfig.getThreadPoolSize(); i++) {
             ScheduledFuture<?> future = scheduledExecutorService
-                    .scheduleAtFixedRate(new SQSBuilder(sourceConfig, sourceEventListener).buildSourceTask(),
+                    .scheduleAtFixedRate(new SQSBuilder(sourceConfig).buildSourceTask(sourceEventListener),
                             0, sourceConfig.getPollingInterval(), TimeUnit.MILLISECONDS);
             futures.add(future);
         }

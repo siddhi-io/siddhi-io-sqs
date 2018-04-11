@@ -23,13 +23,15 @@ package org.wso2.extension.siddhi.io.sqs.util;
  */
 public class SQSConstants {
 
-    // Option parameter names
-    public static final String QUEUE_NAME = "queue";
+    // general properties for sqs client
     public static final String ACCESS_KEY_NAME = "access.key";
     public static final String SECRET_KEY_NAME = "secret.key";
     public static final String REGION_NAME = "region";
+    public static final String QUEUE_URL_NAME = "queue";
+
+    // Option parameter names for source
     public static final String POLLING_INTERVAL_NAME = "polling.interval";
-    public static final String WAITING_TIME_NAME = "waiting.time";
+    public static final String WAIT_TIME_NAME = "wait.time";
     public static final String MAX_NUMBER_OF_MESSAGES_NAME = "max.number.of.messages";
     public static final String VISIBILITY_TIMEOUT_NAME = "visibility.timeout";
     public static final String DELETE_MESSAGES_NAME = "delete.messages";
@@ -37,10 +39,15 @@ public class SQSConstants {
     public static final String MAX_NUMBER_OF_DELETE_RETRY_ATTEMPTS_NAME = "max.number.of.delete.retry.attempts";
     public static final String PARALLEL_CONSUMERS_NAME = "number.of.parallel.consumers";
 
-    // transport properties
+    // Option parameters for sink
+    public static final String MESSAGE_GROUP_ID_NAME = "message.group.id";
+    public static final String DEDUPLICATION_ID_NAME = "deduplication.id";
+    public static final String DELAY_INTERVAL_NAME = "delay.interval";
+
+    // transport properties (only for source)
     public static final String MESSAGE_ID_PROPERTY_NAME = "MESSAGE_ID";
 
-    // Default Options
+    // source default Options
     public static final int DEFAULT_MAX_NUMBER_OF_MESSAGES = 1;
     public static final boolean DEFAULT_DELETE_AFTER_CONSUME = true;
     public static final int DEFAULT_RETRY_COUNT_LIMIT = 10;
@@ -49,9 +56,9 @@ public class SQSConstants {
     public static final int DEFAULT_VISIBILITY_TIMEOUT = -1;
     public static final int DEFAULT_WAITING_TIME = -1;
     public static final int DEFAULT_PARALLEL_CONSUMERS = 1;
-    public static final boolean DEFAULT_BATCH_MESSAGES = false;
-    public static final int DEFAULT_MESSAGES_PER_BATCH = 10;
-    public static final int DEFAULT_BATCH_MESSAGE_TIMEOUT = 60;
+
+    // sink default options
+    public static final int DEFAULT_DELAY_INTERVAL = -1;
 
     // HTTP Constants
     public static final int HTTP_SUCCESS = 200;
