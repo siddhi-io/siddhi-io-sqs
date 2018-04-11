@@ -16,7 +16,7 @@
     
     
       
-        <title>1.0.0 - Siddhi-IO-SQS</title>
+        <title>1.0.1 - Siddhi-IO-SQS</title>
       
     
     
@@ -84,7 +84,7 @@
                 </span>
               
             
-            1.0.0
+            1.0.1
           
         </span>
       </div>
@@ -181,18 +181,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../1.0.1/" title="1.0.1" class="md-nav__link">
-      1.0.1
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -204,11 +192,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        1.0.0
+        1.0.1
       </label>
     
-    <a href="./" title="1.0.0" class="md-nav__link md-nav__link--active">
-      1.0.0
+    <a href="./" title="1.0.1" class="md-nav__link md-nav__link--active">
+      1.0.1
     </a>
     
       
@@ -267,6 +255,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.0.0/" title="1.0.0" class="md-nav__link">
+      1.0.0
+    </a>
   </li>
 
         
@@ -386,28 +386,95 @@
               
                 
                 
-                <h1 id="api-docs-v100">API Docs - v1.0.0</h1>
+                <h1 id="api-docs-v101">API Docs - v1.0.1</h1>
 <h2 id="sink">Sink</h2>
 <h3 id="sqs-sink">sqs <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sink">(Sink)</a></em></h3>
-<p style="word-wrap: break-word"> </p>
+<p style="word-wrap: break-word">SQS sink allows users to connect and publish messages to an AWS SQS Queue. It has the ability to only publish Text messages</p>
 
 <p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<pre><code>@sink(type=&quot;sqs&quot;, @map(...)))
+<pre><code>@sink(type=&quot;sqs&quot;, queue=&quot;&lt;STRING&gt;&quot;, access.key=&quot;&lt;STRING&gt;&quot;, secret.key=&quot;&lt;STRING&gt;&quot;, region=&quot;&lt;STRING&gt;&quot;, message.group.id=&quot;&lt;STRING&gt;&quot;, deduplication.id=&quot;&lt;STRING&gt;&quot;, delay.interval=&quot;&lt;INT&gt;&quot;, @map(...)))
 </code></pre>
 
+<p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
+<table>
+    <tr>
+        <th>Name</th>
+        <th style="min-width: 20em">Description</th>
+        <th>Default Value</th>
+        <th>Possible Data Types</th>
+        <th>Optional</th>
+        <th>Dynamic</th>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">queue</td>
+        <td style="vertical-align: top; word-wrap: break-word">Queue url which SQS Sink should connect to</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">STRING</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">access.key</td>
+        <td style="vertical-align: top; word-wrap: break-word">Access Key for the Amazon Web Services. (This is a mandatory field and should be provided either in the deployment.yml or in the sink definition itself)</td>
+        <td style="vertical-align: top">none</td>
+        <td style="vertical-align: top">STRING</td>
+        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">secret.key</td>
+        <td style="vertical-align: top; word-wrap: break-word">Secret Key of the Amazon User. (This is a mandatory field and should be provided either in the deployment.yml or in the sink definition itself)</td>
+        <td style="vertical-align: top">none</td>
+        <td style="vertical-align: top">STRING</td>
+        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">region</td>
+        <td style="vertical-align: top; word-wrap: break-word">Amazon Web Service Region</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">STRING</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">message.group.id</td>
+        <td style="vertical-align: top; word-wrap: break-word">ID of the group that the message belong to(only applicable for FIFO Queues)</td>
+        <td style="vertical-align: top">null</td>
+        <td style="vertical-align: top">STRING</td>
+        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">Yes</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">deduplication.id</td>
+        <td style="vertical-align: top; word-wrap: break-word">ID by which a FIFO queue identifies the duplication in the queue(only applicable for FIFO queues)</td>
+        <td style="vertical-align: top">null</td>
+        <td style="vertical-align: top">STRING</td>
+        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">Yes</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">delay.interval</td>
+        <td style="vertical-align: top; word-wrap: break-word">Time in seconds for how long the message remain in the queue until it is available for the consumers to consume.</td>
+        <td style="vertical-align: top">-1</td>
+        <td style="vertical-align: top">INT</td>
+        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+</table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<pre><code>
+<pre><code>@sink(type='sqs',queue='&lt;queue_url&gt;',access.key='&lt;aws_access_key&gt;',secret.key='&lt;aws_secret_key&gt;',region='&lt;region&gt;',delay.interval='5',deduplication.id='{{deduplicationID}}',message.group.id='charuka',@map(type='xml') )define stream outStream(symbol string, deduplicationID string);
 </code></pre>
 
-<p style="word-wrap: break-word"> </p>
+<p style="word-wrap: break-word">Following Example shows how to define a SQS sink to publish messages to the service</p>
 
 <h2 id="source">Source</h2>
 <h3 id="sqs-source">sqs <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#source">(Source)</a></em></h3>
-<p style="word-wrap: break-word">SQS source allows users to subscribe and consume messages from a AWS SQS Queue. It has the ability to receive Text messages</p>
+<p style="word-wrap: break-word">SQS source allows users to connect and consume messages from a AWS SQS Queue. It has the ability to receive Text messages</p>
 
 <p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<pre><code>@source(type=&quot;sqs&quot;, queue=&quot;&lt;STRING&gt;&quot;, access.key=&quot;&lt;STRING&gt;&quot;, secret.key=&quot;&lt;STRING&gt;&quot;, region=&quot;&lt;STRING&gt;&quot;, polling.interval=&quot;&lt;INT&gt;&quot;, waiting.time=&quot;&lt;INT&gt;&quot;, max.number.of.messages=&quot;&lt;INT&gt;&quot;, visibility.timeout=&quot;&lt;INT&gt;&quot;, delete.messages=&quot;&lt;BOOL&gt;&quot;, delete.retry.interval=&quot;&lt;INT&gt;&quot;, max.number.of.delete.retry.attempts=&quot;&lt;INT&gt;&quot;, number.of.parallel.consumers=&quot;&lt;INT&gt;&quot;, @map(...)))
+<pre><code>@source(type=&quot;sqs&quot;, queue=&quot;&lt;STRING&gt;&quot;, access.key=&quot;&lt;STRING&gt;&quot;, secret.key=&quot;&lt;STRING&gt;&quot;, region=&quot;&lt;STRING&gt;&quot;, polling.interval=&quot;&lt;INT&gt;&quot;, wait.time=&quot;&lt;INT&gt;&quot;, max.number.of.messages=&quot;&lt;INT&gt;&quot;, visibility.timeout=&quot;&lt;INT&gt;&quot;, delete.messages=&quot;&lt;BOOL&gt;&quot;, delete.retry.interval=&quot;&lt;INT&gt;&quot;, max.number.of.delete.retry.attempts=&quot;&lt;INT&gt;&quot;, number.of.parallel.consumers=&quot;&lt;INT&gt;&quot;, @map(...)))
 </code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
@@ -430,18 +497,18 @@
     </tr>
     <tr>
         <td style="vertical-align: top">access.key</td>
-        <td style="vertical-align: top; word-wrap: break-word">Access Key for the Amazon Web Services</td>
-        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top; word-wrap: break-word">Access Key for the Amazon Web Services. (This is a mandatory field and should be provided either in the deployment.yml or in the source definition itself)</td>
+        <td style="vertical-align: top">null</td>
         <td style="vertical-align: top">STRING</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
         <td style="vertical-align: top">secret.key</td>
-        <td style="vertical-align: top; word-wrap: break-word">Secret Key of the Amazon User</td>
-        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top; word-wrap: break-word">Secret Key of the Amazon User. (This is a mandatory field and should be provided either in the deployment.yml or in the source definition itself)</td>
+        <td style="vertical-align: top">null</td>
         <td style="vertical-align: top">STRING</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
@@ -461,7 +528,7 @@
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
-        <td style="vertical-align: top">waiting.time</td>
+        <td style="vertical-align: top">wait.time</td>
         <td style="vertical-align: top; word-wrap: break-word">Maximum amount (in seconds) that a polling call will wait for a message to become available in the queue</td>
         <td style="vertical-align: top">-1</td>
         <td style="vertical-align: top">INT</td>
@@ -519,7 +586,7 @@
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<pre><code>@source(type='sqs',queue='&lt;queue url&gt;',access.key='&lt;access_key&gt;',secret.key='&lt;secret_key&gt;',region='us-east-2',polling.interval='5000',max.number.of.messages='10',number.of.parallel.consumers='1',purge.messages='true',waiting.time='2',visibility.timeout='30',delete.retry.interval='1000',max.number.of.delete.retry.attempts='10',@map(type='xml',enclosing.element=&quot;//events&quot;,@attributes(symbol='symbol', message_id='trp:MESSAGE_ID') ))define stream inStream (symbol string, message_id string);
+<pre><code>@source(type='sqs',queue='&lt;queue url&gt;',access.key='&lt;access_key&gt;',secret.key='&lt;secret_key&gt;',region='us-east-2',polling.interval='5000',max.number.of.messages='10',number.of.parallel.consumers='1',purge.messages='true',wait.time='2',visibility.timeout='30',delete.retry.interval='1000',max.number.of.delete.retry.attempts='10',@map(type='xml',enclosing.element=&quot;//events&quot;,@attributes(symbol='symbol', message_id='trp:MESSAGE_ID') ))define stream inStream (symbol string, message_id string);
 </code></pre>
 
 <p style="word-wrap: break-word">Following Example shows how to define a SQS source to receive messages from the service</p>
@@ -541,7 +608,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../1.0.1/" title="1.0.1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../.." title="Welcome to WSO2 Siddhi IO SQS" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -550,19 +617,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                1.0.1
+                Welcome to WSO2 Siddhi IO SQS
               </span>
             </div>
           </a>
         
         
-          <a href="../.md/" title="" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../1.0.0/" title="1.0.0" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                
+                1.0.0
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
