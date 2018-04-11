@@ -163,11 +163,11 @@ public class SQSSink extends Sink {
         this.optionHolder = optionHolder;
         this.sqsMessagePublisher = null;
 
-        if (this.sinkConfig.getAccessKey() == null) {
+        if (this.sinkConfig.getAccessKey() == null || sinkConfig.getAccessKey().isEmpty()) {
             this.sinkConfig.setAccessKey(configReader.readConfig(SQSConstants.ACCESS_KEY_NAME, null));
         }
 
-        if (this.sinkConfig.getSecretKey() == null) {
+        if (this.sinkConfig.getSecretKey() == null || sinkConfig.getSecretKey().isEmpty()) {
             this.sinkConfig.setSecretKey(configReader.readConfig(SQSConstants.SECRET_KEY_NAME, null));
         }
 

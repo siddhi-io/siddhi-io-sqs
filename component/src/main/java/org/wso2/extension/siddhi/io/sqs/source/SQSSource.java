@@ -182,11 +182,11 @@ public class SQSSource extends Source {
                      SiddhiAppContext siddhiAppContext) {
         this.sourceConfig = new SQSSourceConfig(optionHolder, requestedTransportPropertyNames);
 
-        if (this.sourceConfig.getAccessKey() == null) {
+        if (this.sourceConfig.getAccessKey() == null  || sourceConfig.getAccessKey().isEmpty()) {
             this.sourceConfig.setAccessKey(configReader.readConfig(SQSConstants.ACCESS_KEY_NAME, null));
         }
 
-        if (this.sourceConfig.getSecretKey() == null) {
+        if (this.sourceConfig.getSecretKey() == null || sourceConfig.getAccessKey().isEmpty()) {
             this.sourceConfig.setSecretKey(configReader.readConfig(SQSConstants.SECRET_KEY_NAME, null));
         }
 

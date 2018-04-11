@@ -44,39 +44,39 @@ public class SQSMessagePublisher {
 
     private SendMessageRequest generateMessageRequest(String message) {
 
-        SendMessageRequest sendMessageRequest = new SendMessageRequest()
+        SendMessageRequest messageRequest = new SendMessageRequest()
                 .withQueueUrl(sqsSinkConfig.getQueueUrl())
                 .withMessageBody(message);
 
         if (sqsSinkConfig.getDelayIntervalTime() != -1) {
-            sendMessageRequest.withDelaySeconds(sqsSinkConfig.getDelayIntervalTime());
+            messageRequest.withDelaySeconds(sqsSinkConfig.getDelayIntervalTime());
         }
-        return sendMessageRequest;
+        return messageRequest;
     }
 
     public void sendMessageRequest(Object payload, DynamicOptions dynamicOptions)
             throws ConnectionUnavailableException {
 
-        SendMessageRequest sendMessageRequest = generateMessageRequest((String) payload);
+        SendMessageRequest messageRequest = generateMessageRequest((String) payload);
         if (isFIFO) {
-            sendMessageRequest
+            messageRequest
                     .withMessageGroupId(
                             optionHolder.validateAndGetOption(SQSConstants.MESSAGE_GROUP_ID_NAME)
                                     .getValue(dynamicOptions));
 
             if (optionHolder.getDynamicOptionsKeys().contains(SQSConstants.DEDUPLICATION_ID_NAME)) {
-                sendMessageRequest
+                messageRequest
                         .withMessageDeduplicationId(
                                 optionHolder.validateAndGetOption(SQSConstants.DEDUPLICATION_ID_NAME)
                                         .getValue(dynamicOptions));
             }
         }
 
-        SendMessageResult sendMessageResult = amazonSQS.sendMessage(sendMessageRequest);
+        SendMessageResult messageResult = amazonSQS.sendMessage(messageRequest);
 
-        if (sendMessageResult.getSdkHttpMetadata().getHttpStatusCode() != SQSConstants.HTTP_SUCCESS) {
+        if (messageResult.getSdkHttpMetadata().getHttpStatusCode() != SQSConstants.HTTP_SUCCESS) {
             throw new ConnectionUnavailableException("Error occurred when trying to send the message, received http" +
-                    " status code : " + sendMessageResult.getSdkHttpMetadata().getHttpStatusCode());
+                    " status code : " + messageResult.getSdkHttpMetadata().getHttpStatusCode());
         }
     }
 }
