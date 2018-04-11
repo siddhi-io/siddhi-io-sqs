@@ -54,7 +54,7 @@ public class SQSSourceConfig extends SQSConfig {
                 case SQSConstants.REGION_NAME:
                     super.setRegion(optionHolder.validateAndGetStaticValue(key));
                     break;
-                case SQSConstants.WAITING_TIME_NAME:
+                case SQSConstants.WAIT_TIME_NAME:
                     this.waitTime = getIntegerOptionValue(optionHolder, key);
                     break;
                 case SQSConstants.VISIBILITY_TIMEOUT_NAME:

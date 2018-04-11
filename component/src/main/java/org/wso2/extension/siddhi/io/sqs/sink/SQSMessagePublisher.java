@@ -51,9 +51,7 @@ public class SQSMessagePublisher {
         if (sqsSinkConfig.getDelayIntervalTime() != -1) {
             sendMessageRequest.withDelaySeconds(sqsSinkConfig.getDelayIntervalTime());
         }
-
         return sendMessageRequest;
-
     }
 
     public void sendMessageRequest(Object payload, DynamicOptions dynamicOptions)
@@ -72,7 +70,6 @@ public class SQSMessagePublisher {
                                 optionHolder.validateAndGetOption(SQSConstants.DEDUPLICATION_ID_NAME)
                                         .getValue(dynamicOptions));
             }
-
         }
 
         SendMessageResult sendMessageResult = amazonSQS.sendMessage(sendMessageRequest);
@@ -82,6 +79,4 @@ public class SQSMessagePublisher {
                     " status code : " + sendMessageResult.getSdkHttpMetadata().getHttpStatusCode());
         }
     }
-
-
 }

@@ -8,13 +8,9 @@ import org.wso2.siddhi.core.stream.input.InputHandler;
 import java.util.Date;
 
 public class TestCaseOfSQSSink {
-    // If you will know about this related testcase,
-    //refer https://github.com/wso2-extensions/siddhi-io-file/blob/master/component/src/test
 
-    /**
-     * To run this test case a FIFO queue should be created in the AWS SQS service.
-     * Since a valid sqs queue information are required. for this test case it was commented.
-     */
+    // Before running this test provide valid FIFO queue information in the stream definition.
+    // Due to not having a service to test against this test is commented out in the testng.xml
     @Test
     public void testSQSMessagePublisherInitialization() throws InterruptedException {
         SiddhiAppRuntime siddhiAppRuntime = null;
@@ -31,13 +27,9 @@ public class TestCaseOfSQSSink {
                     "message.group.id='charuka',@map(type='xml') )" +
                     "define stream outStream(symbol string, deduplicationID string);";
 
-
             siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(streamDef);
-
             InputHandler inputHandler = siddhiAppRuntime.getInputHandler("outStream");
-
             siddhiAppRuntime.start();
-
             inputHandler.send(new Object[]{"message 1", new Date().getTime()});
         } finally {
             if (siddhiAppRuntime != null) {

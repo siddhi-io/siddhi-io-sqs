@@ -31,6 +31,7 @@ import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.core.util.transport.DynamicOptions;
 import org.wso2.siddhi.core.util.transport.OptionHolder;
 import org.wso2.siddhi.query.api.definition.StreamDefinition;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.Map;
 
@@ -46,7 +47,7 @@ import java.util.Map;
         parameters = {
                 @Parameter(
                         name = SQSConstants.QUEUE_URL_NAME,
-                        description = "Queue name which SQS Sink should subscribe to",
+                        description = "Queue url which SQS Sink should connect to",
                         type = DataType.STRING
                 ),
                 @Parameter(
@@ -168,6 +169,12 @@ public class SQSSink extends Sink {
 
         if (this.sinkConfig.getSecretKey() == null) {
             this.sinkConfig.setSecretKey(configReader.readConfig(SQSConstants.SECRET_KEY_NAME, null));
+        }
+
+        if (sinkConfig.getAccessKey() == null || sinkConfig.getSecretKey() == null ||
+                sinkConfig.getAccessKey().isEmpty() || sinkConfig.getSecretKey().isEmpty()) {
+            throw new SiddhiAppValidationException("Access key and Secret key are mandatory parameters for" +
+                    " the SQS client");
         }
     }
 

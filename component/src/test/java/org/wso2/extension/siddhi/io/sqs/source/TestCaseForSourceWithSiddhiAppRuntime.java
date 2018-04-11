@@ -27,12 +27,8 @@ import org.wso2.siddhi.core.util.EventPrinter;
 
 public class TestCaseForSourceWithSiddhiAppRuntime {
 
-    /**
-     * For this Test case Follow the following instructions.
-     * 1) Create any type of queue in a Service
-     * 2) Replace the queue url, access key, secret key in proper places with the ones relevant to the queue.
-     * 3) Uncomment and run the Test.
-     */
+    // Before running this test provide valid queue information in the stream definition.
+    // Due to not having a service to test against this test is commented out in the testng.xml
     @Test
     public void testSQSSourceTask() throws InterruptedException {
         String inStreamDef = "@source(type='sqs'," +

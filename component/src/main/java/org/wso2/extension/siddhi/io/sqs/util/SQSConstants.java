@@ -31,7 +31,7 @@ public class SQSConstants {
 
     // Option parameter names for source
     public static final String POLLING_INTERVAL_NAME = "polling.interval";
-    public static final String WAITING_TIME_NAME = "waiting.time";
+    public static final String WAIT_TIME_NAME = "wait.time";
     public static final String MAX_NUMBER_OF_MESSAGES_NAME = "max.number.of.messages";
     public static final String VISIBILITY_TIMEOUT_NAME = "visibility.timeout";
     public static final String DELETE_MESSAGES_NAME = "delete.messages";

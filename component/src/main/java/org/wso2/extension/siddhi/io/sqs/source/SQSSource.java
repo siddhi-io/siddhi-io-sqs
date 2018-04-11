@@ -31,6 +31,7 @@ import org.wso2.siddhi.core.stream.input.source.Source;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.core.util.transport.OptionHolder;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +82,7 @@ import java.util.concurrent.TimeUnit;
                         type = DataType.INT
                 ),
                 @Parameter(
-                        name = SQSConstants.WAITING_TIME_NAME,
+                        name = SQSConstants.WAIT_TIME_NAME,
                         description = "Maximum amount (in seconds) that a polling call will wait for a message to " +
                                 "become available in the queue",
                         type = DataType.INT,
@@ -144,7 +145,7 @@ import java.util.concurrent.TimeUnit;
                                 "max.number.of.messages='10'," +
                                 "number.of.parallel.consumers='1'," +
                                 "purge.messages='true'," +
-                                "waiting.time='2'," +
+                                "wait.time='2'," +
                                 "visibility.timeout='30'," +
                                 "delete.retry.interval='1000'," +
                                 "max.number.of.delete.retry.attempts='10'," +
@@ -189,6 +190,12 @@ public class SQSSource extends Source {
             this.sourceConfig.setSecretKey(configReader.readConfig(SQSConstants.SECRET_KEY_NAME, null));
         }
 
+        if (sourceConfig.getAccessKey() == null || sourceConfig.getSecretKey() == null ||
+                sourceConfig.getAccessKey().isEmpty() || sourceConfig.getSecretKey().isEmpty()) {
+            throw new SiddhiAppValidationException("Access key and Secret key are mandatory parameters" +
+                    " for the SQS client");
+        }
+
         scheduledExecutorService = siddhiAppContext.getScheduledExecutorService();
         this.sourceEventListener = sourceEventListener;
     }
@@ -201,7 +208,7 @@ public class SQSSource extends Source {
      */
     @Override
     public Class[] getOutputEventClasses() {
-        return new Class[]{String.class}; // SQS message body supports only text.
+        return new Class[] {String.class}; // SQS message body supports only text.
     }
 
     /**
