@@ -19,9 +19,10 @@ Find some useful links below:
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/1.0.1">1.0.1</a>.
+Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/1.0.2">1.0.2</a>.
 
-## Features
+# Features
+
 
 ## How to use
 
@@ -43,6 +44,7 @@ Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/si
         <version>x.x.x</version>
      </dependency>
 ```
+
 
  * Post your questions with the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag in <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a>.
 
