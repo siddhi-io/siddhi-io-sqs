@@ -210,7 +210,7 @@
     </scm>
 
     <properties>
-        <siddhi.version>4.2.0</siddhi.version>
+        <siddhi.version>4.2.12</siddhi.version>
         <log4j.version>1.2.17.wso2v1</log4j.version>
         <carbon.transport.version>4.4.15</carbon.transport.version>
         <siddhi.map.json.version>4.0.29</siddhi.map.json.version>
