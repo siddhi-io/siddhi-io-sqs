@@ -137,9 +137,9 @@ import java.util.concurrent.TimeUnit;
         examples = {
                 @Example(
                         syntax = "@source(type='sqs'," +
-                                "queue='<queue url>'," +
-                                "access.key='<access_key>'," +
-                                "secret.key='<secret_key>'," +
+                                "queue='http://aws.sqs.queue.url'," +
+                                "access.key='aws.access.key'," +
+                                "secret.key='aws.secret.key'," +
                                 "region='us-east-2'," +
                                 "polling.interval='5000'," +
                                 "max.number.of.messages='10'," +
@@ -152,8 +152,13 @@ import java.util.concurrent.TimeUnit;
                                 "@map(type='xml',enclosing.element=\"//events\"," +
                                 "@attributes(symbol='symbol', message_id='trp:MESSAGE_ID') ))" +
                                 "define stream inStream (symbol string, message_id string);",
-                        description = "Following Example shows how to define a SQS source to receive messages from " +
-                                "the service"
+                        description = "" +
+                                "Above example demonstrate how an SQS source is getting configured in order to " +
+                                "consume messages from an SQS queue.\n" +
+                                "SQS source will establish the connection to a queue using given configurations and " +
+                                "start consume xml messages from the queue.\n" +
+                                "Once a message is received by the source, 'xml' mapper will generate a siddhi event " +
+                                "from that message and pass it to the inStream."
                 )
         }
 )
