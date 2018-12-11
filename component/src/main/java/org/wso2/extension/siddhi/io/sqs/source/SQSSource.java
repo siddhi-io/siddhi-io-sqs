@@ -156,9 +156,9 @@ import java.util.concurrent.TimeUnit;
                                 "Above example demonstrate how an SQS source is getting configured in order to " +
                                 "consume messages from an SQS queue.\n" +
                                 "SQS source will establish the connection to a queue using given configurations and " +
-                                "start consume xml messages from the queue.\n" +
-                                "Once a message is received by the source, 'xml' mapper will generate a siddhi event " +
-                                "from that message and pass it to the inStream."
+                                "start consuming xml messages from the queue.\n" +
+                                "Once a message is received by the source from the given queue, 'xml' mapper will " +
+                                "generate a siddhi event from that message and pass it to the inStream."
                 )
         }
 )
