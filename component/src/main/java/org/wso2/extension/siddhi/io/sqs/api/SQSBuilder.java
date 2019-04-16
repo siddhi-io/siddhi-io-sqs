@@ -23,14 +23,14 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import io.siddhi.core.exception.SiddhiAppRuntimeException;
+import io.siddhi.core.stream.input.source.SourceEventListener;
+import io.siddhi.core.util.transport.OptionHolder;
 import org.wso2.extension.siddhi.io.sqs.sink.SQSMessagePublisher;
 import org.wso2.extension.siddhi.io.sqs.sink.SQSSinkConfig;
 import org.wso2.extension.siddhi.io.sqs.source.SQSSourceConfig;
 import org.wso2.extension.siddhi.io.sqs.source.SQSSourceTask;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConfig;
-import org.wso2.siddhi.core.exception.SiddhiAppRuntimeException;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
 
 /**
  * Class to provide the executable tasks for the Source and Sink.

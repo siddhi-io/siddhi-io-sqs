@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.extension.siddhi.io.sqs</groupId>
         <artifactId>siddhi-io-sqs-parent</artifactId>
-        <version>1.1.1-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>siddhi-io-sqs</artifactId>
@@ -30,19 +30,19 @@
     <name>Siddhi io sqs extension</name>
     <dependencies>
         <dependency>
-            <groupId>org.wso2.siddhi</groupId>
+            <groupId>io.siddhi</groupId>
             <artifactId>siddhi-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.siddhi</groupId>
+            <groupId>io.siddhi</groupId>
             <artifactId>siddhi-annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.siddhi</groupId>
+            <groupId>io.siddhi</groupId>
             <artifactId>siddhi-query-compiler</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.siddhi</groupId>
+            <groupId>io.siddhi</groupId>
             <artifactId>siddhi-query-api</artifactId>
         </dependency>
         <dependency>
@@ -144,7 +144,7 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.wso2.siddhi</groupId>
+                        <groupId>io.siddhi</groupId>
                         <artifactId>siddhi-doc-gen</artifactId>
                         <version>${siddhi.version}</version>
                         <executions>
@@ -228,12 +228,12 @@
                         </Export-Package>
                         <Import-Package>
                             com.amazonaws.*;version="${aws.java.sqs.sdk.version.range}",
-                            org.wso2.siddhi.annotation.*;version="${siddhi.version.range}",
-                            org.wso2.siddhi.core.*;version="${siddhi.version.range}",
+                            io.siddhi.annotation.*;version="${siddhi.version.range}",
+                            io.siddhi.core.*;version="${siddhi.version.range}",
                             org.apache.log4j.*,
-                            org.wso2.siddhi.query.api.exception.*;version="${siddhi.version.range}",
-                            org.wso2.siddhi.core.exception.*;version="${siddhi.version.range}",
-                            org.wso2.siddhi.core.stream.input.source.*;version="${siddhi.version.range}",
+                            io.siddhi.query.api.exception.*;version="${siddhi.version.range}",
+                            io.siddhi.core.exception.*;version="${siddhi.version.range}",
+                            io.siddhi.core.stream.input.source.*;version="${siddhi.version.range}",
                         </Import-Package>
                         <Include-Resource>
                             META-INF=target/classes/META-INF
@@ -242,7 +242,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.wso2.siddhi</groupId>
+                <groupId>io.siddhi</groupId>
                 <artifactId>siddhi-doc-gen</artifactId>
                 <version>${siddhi.version}</version>
                 <executions>
@@ -257,7 +257,7 @@
     </build>
 
     <properties>
-        <siddhi.version.range>[4.1.0,5.0.0)</siddhi.version.range>
+        <siddhi.version.range>[5.0.0,6.0.0)</siddhi.version.range>
     </properties>
 
 </project>

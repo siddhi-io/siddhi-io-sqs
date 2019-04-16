@@ -25,9 +25,9 @@ import com.amazonaws.services.sqs.model.DeleteMessageRequest;
 import com.amazonaws.services.sqs.model.DeleteMessageResult;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
+import io.siddhi.core.stream.input.source.SourceEventListener;
 import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
 import java.util.List;
 

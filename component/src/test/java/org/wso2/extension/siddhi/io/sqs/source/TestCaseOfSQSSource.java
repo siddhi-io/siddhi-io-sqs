@@ -25,6 +25,7 @@ import com.amazonaws.services.sqs.model.DeleteMessageResult;
 import com.amazonaws.services.sqs.model.InvalidIdFormatException;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiptHandleIsInvalidException;
+import io.siddhi.core.stream.input.source.SourceEventListener;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.legacy.PowerMockRunner;
@@ -32,7 +33,6 @@ import org.powermock.reflect.Whitebox;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
