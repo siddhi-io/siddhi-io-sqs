@@ -19,7 +19,7 @@ Find some useful links below:
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/1.1.0">1.1.0</a>.
+Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/2.0.0">2.0.0</a>.
 
 # Features
 
