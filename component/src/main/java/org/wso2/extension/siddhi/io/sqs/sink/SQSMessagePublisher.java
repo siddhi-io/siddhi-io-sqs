@@ -21,10 +21,10 @@ package org.wso2.extension.siddhi.io.sqs.sink;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.amazonaws.services.sqs.model.SendMessageResult;
+import io.siddhi.core.exception.ConnectionUnavailableException;
+import io.siddhi.core.util.transport.DynamicOptions;
+import io.siddhi.core.util.transport.OptionHolder;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
-import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
-import org.wso2.siddhi.core.util.transport.DynamicOptions;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
 
 /**
  * Message publisher class for SQS.

@@ -18,24 +18,26 @@
 
 package org.wso2.extension.siddhi.io.sqs.source;
 
+import io.siddhi.annotation.Example;
+import io.siddhi.annotation.Extension;
+import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.util.DataType;
+import io.siddhi.core.config.SiddhiAppContext;
+import io.siddhi.core.exception.ConnectionUnavailableException;
+import io.siddhi.core.stream.ServiceDeploymentInfo;
+import io.siddhi.core.stream.input.source.Source;
+import io.siddhi.core.stream.input.source.SourceEventListener;
+import io.siddhi.core.util.config.ConfigReader;
+import io.siddhi.core.util.snapshot.state.State;
+import io.siddhi.core.util.snapshot.state.StateFactory;
+import io.siddhi.core.util.transport.OptionHolder;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.sqs.api.SQSBuilder;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
-import org.wso2.siddhi.annotation.Example;
-import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.annotation.Parameter;
-import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.config.SiddhiAppContext;
-import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
-import org.wso2.siddhi.core.stream.input.source.Source;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
-import org.wso2.siddhi.core.util.config.ConfigReader;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -178,13 +180,13 @@ public class SQSSource extends Source {
      *                            Listener will then pass on the events to the appropriate mappers for processing .
      * @param optionHolder        Option holder containing static configuration related to the {@link Source}
      * @param configReader        ConfigReader is used to read the {@link Source} related system configuration.
-     * @param siddhiAppContext    the context of the {@link org.wso2.siddhi.query.api.SiddhiApp} used to get Siddhi
+     * @param siddhiAppContext    the context of the {@link io.siddhi.query.api.SiddhiApp} used to get Siddhi
      *                            related utility functions.
      */
     @Override
-    public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
-                     String[] requestedTransportPropertyNames, ConfigReader configReader,
-                     SiddhiAppContext siddhiAppContext) {
+    public StateFactory init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
+                             String[] requestedTransportPropertyNames, ConfigReader configReader,
+                             SiddhiAppContext siddhiAppContext) {
         this.sourceConfig = new SQSSourceConfig(optionHolder, requestedTransportPropertyNames);
 
         if (this.sourceConfig.getAccessKey() == null  || sourceConfig.getAccessKey().isEmpty()) {
@@ -203,6 +205,12 @@ public class SQSSource extends Source {
 
         scheduledExecutorService = siddhiAppContext.getScheduledExecutorService();
         this.sourceEventListener = sourceEventListener;
+        return null;
+    }
+
+    @Override
+    protected ServiceDeploymentInfo exposeServiceDeploymentInfo() {
+        return null;
     }
 
     /**
@@ -224,7 +232,7 @@ public class SQSSource extends Source {
      * @throws ConnectionUnavailableException if it cannot connect to the source backend immediately.
      */
     @Override
-    public void connect(ConnectionCallback connectionCallback) throws ConnectionUnavailableException {
+    public void connect(ConnectionCallback connectionCallback, State state) throws ConnectionUnavailableException {
         this.startPolling();
     }
 
@@ -258,29 +266,6 @@ public class SQSSource extends Source {
     @Override
     public void resume() {
         this.startPolling();
-    }
-
-    /**
-     * Used to collect the serializable state of the processing element, that need to be
-     * persisted for the reconstructing the element to the same state on a different point of time
-     *
-     * @return stateful objects of the processing element as a map
-     */
-    @Override
-    public Map<String, Object> currentState() {
-        return null;
-    }
-
-    /**
-     * Used to restore serialized state of the processing element, for reconstructing
-     * the element to the same state as if was on a previous point of time.
-     *
-     * @param map the stateful objects of the processing element as a map.
-     *            This map will have the  same keys that is created upon calling currentState() method.
-     */
-    @Override
-    public void restoreState(Map<String, Object> map) {
-        // no state
     }
 
     private void startPolling() {

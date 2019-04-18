@@ -18,22 +18,23 @@
 
 package org.wso2.extension.siddhi.io.sqs.sink;
 
+import io.siddhi.annotation.Example;
+import io.siddhi.annotation.Extension;
+import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.util.DataType;
+import io.siddhi.core.config.SiddhiAppContext;
+import io.siddhi.core.exception.ConnectionUnavailableException;
+import io.siddhi.core.stream.ServiceDeploymentInfo;
+import io.siddhi.core.stream.output.sink.Sink;
+import io.siddhi.core.util.config.ConfigReader;
+import io.siddhi.core.util.snapshot.state.State;
+import io.siddhi.core.util.snapshot.state.StateFactory;
+import io.siddhi.core.util.transport.DynamicOptions;
+import io.siddhi.core.util.transport.OptionHolder;
+import io.siddhi.query.api.definition.StreamDefinition;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.wso2.extension.siddhi.io.sqs.api.SQSBuilder;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
-import org.wso2.siddhi.annotation.Example;
-import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.annotation.Parameter;
-import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.config.SiddhiAppContext;
-import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
-import org.wso2.siddhi.core.stream.output.sink.Sink;
-import org.wso2.siddhi.core.util.config.ConfigReader;
-import org.wso2.siddhi.core.util.transport.DynamicOptions;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
-import org.wso2.siddhi.query.api.definition.StreamDefinition;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
-
-import java.util.Map;
 
 /**
  * SQS Sink Extension
@@ -156,6 +157,11 @@ public class SQSSink extends Sink {
         return new Class[] {String.class};
     }
 
+    @Override
+    protected ServiceDeploymentInfo exposeServiceDeploymentInfo() {
+        return null;
+    }
+
     /**
      * Returns a list of supported dynamic options (that means for each event value of the option can change) by
      * the transport
@@ -175,12 +181,12 @@ public class SQSSink extends Sink {
      * @param optionHolder     Option holder containing static and dynamic configuration related
      *                         to the {@link Sink}
      * @param configReader     to read the sink related system configuration.
-     * @param siddhiAppContext the context of the {@link org.wso2.siddhi.query.api.SiddhiApp} used to
+     * @param siddhiAppContext the context of the {@link io.siddhi.query.api.SiddhiApp} used to
      *                         get siddhi related utility functions.
      */
     @Override
-    protected void init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
-                        SiddhiAppContext siddhiAppContext) {
+    protected StateFactory init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
+                                SiddhiAppContext siddhiAppContext) {
         this.sinkConfig = new SQSSinkConfig(optionHolder);
         this.optionHolder = optionHolder;
         this.sqsMessagePublisher = null;
@@ -198,6 +204,7 @@ public class SQSSink extends Sink {
             throw new SiddhiAppValidationException("Access key and Secret key are mandatory parameters for" +
                     " the SQS client");
         }
+        return null;
     }
 
     /**
@@ -209,7 +216,8 @@ public class SQSSink extends Sink {
      *                                        such that the  system will take care retrying for connection
      */
     @Override
-    public void publish(Object payload, DynamicOptions dynamicOptions) throws ConnectionUnavailableException {
+    public void publish(Object payload, DynamicOptions dynamicOptions, State state)
+            throws ConnectionUnavailableException {
         sqsMessagePublisher.sendMessageRequest(payload, dynamicOptions);
     }
 
@@ -242,30 +250,6 @@ public class SQSSink extends Sink {
     @Override
     public void destroy() {
         // client uses a rest api
-    }
-
-    /**
-     * Used to collect the serializable state of the processing element, that need to be
-     * persisted for reconstructing the element to the same state on a different point of time
-     * This is also used to identify the internal states and debugging
-     *
-     * @return all internal states should be return as an map with meaning full keys
-     */
-    @Override
-    public Map<String, Object> currentState() {
-        return null;
-    }
-
-    /**
-     * Used to restore serialized state of the processing element, for reconstructing
-     * the element to the same state as if was on a previous point of time.
-     *
-     * @param map the stateful objects of the processing element as a map.
-     *            This map will have the  same keys that is created upon calling currentState() method.
-     */
-    @Override
-    public void restoreState(Map<String, Object> map) {
-        // no state.
     }
 
     private boolean checkFIFO(String queueURL) {

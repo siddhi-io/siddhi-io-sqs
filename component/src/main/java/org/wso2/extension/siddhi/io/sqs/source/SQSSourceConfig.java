@@ -18,9 +18,9 @@
 
 package org.wso2.extension.siddhi.io.sqs.source;
 
+import io.siddhi.core.util.transport.OptionHolder;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConfig;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
 
 /**
  * Model class for a Source configuration.

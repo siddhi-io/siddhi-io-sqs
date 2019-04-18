@@ -18,9 +18,9 @@
 
 package org.wso2.extension.siddhi.io.sqs.sink;
 
+import io.siddhi.core.util.transport.OptionHolder;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConfig;
 import org.wso2.extension.siddhi.io.sqs.util.SQSConstants;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
 
 /**
  * Bean class to keep the information related to the SQS Sink.

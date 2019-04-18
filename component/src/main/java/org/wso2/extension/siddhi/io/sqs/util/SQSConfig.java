@@ -18,8 +18,8 @@
 
 package org.wso2.extension.siddhi.io.sqs.util;
 
-import org.wso2.siddhi.core.util.transport.OptionHolder;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
+import io.siddhi.core.util.transport.OptionHolder;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.InputMismatchException;
 
