@@ -23,9 +23,9 @@
 <suite name="Siddhi-Io-SQS-Test-Suite">
     <test name="Siddhi-io-sqs-tests" enabled="true" preserve-order="true" parallel="false">
         <classes>
-            <!--<class name="org.wso2.extension.siddhi.io.sqs.sink.TestCaseOfSQSSink"/>-->
-            <class name="org.wso2.extension.siddhi.io.sqs.source.TestCaseOfSQSSource"/>
-            <!--<class name="org.wso2.extension.siddhi.io.sqs.source.TestCaseForSourceWithSiddhiAppRuntime"/>-->
+            <!--<class name="TestCaseOfSQSSink"/>-->
+            <class name="io.siddhi.extension.io.sqs.source.TestCaseOfSQSSource"/>
+            <!--<class name="TestCaseForSourceWithSiddhiAppRuntime"/>-->
         </classes>
     </test>
 </suite>
