@@ -203,9 +203,9 @@
     </build>
 
     <scm>
-        <url>https://github.com/wso2-extensions/siddhi-io-sqs.git</url>
-        <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-io-sqs.git</developerConnection>
-        <connection>scm:git:https://github.com/wso2-extensions/siddhi-io-sqs.git</connection>
+        <url>https://github.com/siddhi-io/siddhi-io-sqs.git</url>
+        <developerConnection>scm:git:https://github.com/siddhi-io/siddhi-io-sqs.git</developerConnection>
+        <connection>scm:git:https://github.com/siddhi-io/siddhi-io-sqs.git</connection>
         <tag>HEAD</tag>
     </scm>
 
