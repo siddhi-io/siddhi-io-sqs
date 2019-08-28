@@ -12,11 +12,7 @@ The **siddhi-io-sqs extension** is an extension to <a target="_blank" href="http
 that used to receive and publish events via AWS SQS Service. This extension allows users to subscribe to a SQS queue 
 and receive/publish SQS messages.
 
-Find some useful links below:
-
-* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs">Source code</a>
-* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/releases">Releases</a>
-* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/issues">Issue tracker</a>
+For information on <a target="_blank" href="https://siddhi.io/">Siddhi</a> and it's features refer <a target="_blank" href="https://siddhi.io/redirect/docs.html">Siddhi Documentation</a>. 
 
 ## Downloads
 * Versions 3.x and above with group id `io.siddhi.extension.*` from <a target="_blank" href="https://mvnrepository.com/artifact/io.siddhi.extension.io.sqs/siddhi-io-sqs/">here</a>.
@@ -24,12 +20,12 @@ Find some useful links below:
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/2.0.0">2.0.0</a>.
+Latest API Docs is <a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0">2.0.0</a>.
 
 # Features
 
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/2.0.0/#sqs-sink">sqs</a> *<a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#sink">(Sink)</a>*<br><div style="padding-left: 1em;"><p>The sqs sink pushes the events into a sqs broker using the AMQP protocol</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/2.0.0/#sqs-source">sqs</a> *<a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#source">(Source)</a>*<br><div style="padding-left: 1em;"><p>The sqs source receives the events from the sqs broker via the AMQP protocol. </p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0/#sqs-sink">sqs</a> *<a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#sink">(Sink)</a>*<br><div style="padding-left: 1em;"><p>The sqs sink pushes the events into a sqs broker using the AMQP protocol</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0/#sqs-source">sqs</a> *<a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#source">(Source)</a>*<br><div style="padding-left: 1em;"><p>The sqs source receives the events from the sqs broker via the AMQP protocol. </p></div>
 
 ## Dependencies
 There are no other dependencies needed for this extension.
