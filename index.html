@@ -10,13 +10,9 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
-        <meta name="description" content="Siddhi IO sqs Extension">
+        <meta name="description" content="Siddhi IO SQS Extension">
       
       
-        <link rel="canonical" href="https://wso2-extensions.github.io/siddhi-io-sqs/">
-      
-      
-        <meta name="author" content="WSO2">
       
       
         <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -38,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
     
     
       
@@ -46,9 +42,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.750b69bd.css">
+      <link rel="stylesheet" href="assets/stylesheets/application.0284f74d.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/application-palette.224b79ff.css">
+        <link rel="stylesheet" href="assets/stylesheets/application-palette.01803549.css">
       
       
         
@@ -62,14 +58,14 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="assets/fonts/material-icons.css">
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="assets/stylesheets/extra.css">
     
     
       
@@ -110,24 +106,7 @@
       <defs>
         
         
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
-    viewBox="0 0 416 448" id="__github">
-  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
-        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
-        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
-        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
-        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
-        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
-        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
-        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
-        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
-        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
-        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
-        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
-        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
-        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
-        99.5z" />
-</svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
         
       </defs>
     </svg>
@@ -144,9 +123,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://wso2-extensions.github.io/siddhi-io-sqs/" title="Siddhi IO SQS" class="md-header-nav__button md-logo">
+        <a href="." title="Siddhi IO SQS" class="md-header-nav__button md-logo">
           
-            <img src="images/siddhi-logo-w.svg" width="24" height="24">
+            <img src="images/siddhi-logo.svg" width="24" height="24">
           
         </a>
       </div>
@@ -160,7 +139,9 @@
               Siddhi IO SQS
             </span>
             <span class="md-header-nav__topic">
-              Welcome
+              
+                Information
+              
             </span>
           
         </div>
@@ -201,7 +182,7 @@
 
   
 
-<a href="https://github.com/wso2-extensions/siddhi-io-sqs/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/siddhi.io/siddhi-io-sqs/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -234,9 +215,9 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://wso2-extensions.github.io/siddhi-io-sqs/" title="Siddhi IO SQS" class="md-nav__button md-logo">
+    <a href="." title="Siddhi IO SQS" class="md-nav__button md-logo">
       
-        <img src="images/siddhi-logo-w.svg" width="48" height="48">
+        <img src="images/siddhi-logo.svg" width="48" height="48">
       
     </a>
     Siddhi IO SQS
@@ -248,7 +229,7 @@
 
   
 
-<a href="https://github.com/wso2-extensions/siddhi-io-sqs/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/siddhi.io/siddhi-io-sqs/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -279,11 +260,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Welcome
+        Information
       </label>
     
-    <a href="." title="Welcome" class="md-nav__link md-nav__link--active">
-      Welcome
+    <a href="." title="Information" class="md-nav__link md-nav__link--active">
+      Information
     </a>
     
       
@@ -297,8 +278,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jenkins-build-status" title="Jenkins Build Status" class="md-nav__link">
-    Jenkins Build Status
+  <a href="#downloads" title="Downloads" class="md-nav__link">
+    Downloads
   </a>
   
 </li>
@@ -346,8 +327,32 @@
 
 
   <li class="md-nav__item">
-    <a href="api/1.1.1/" title="1.1.1" class="md-nav__link">
-      1.1.1
+    <a href="api/latest/" title="latest" class="md-nav__link">
+      latest
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/3.0.0/" title="3.0.0" class="md-nav__link">
+      3.0.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/2.0.0/" title="2.0.0" class="md-nav__link">
+      2.0.0
     </a>
   </li>
 
@@ -478,18 +483,6 @@
 
 
   <li class="md-nav__item">
-    <a href="api/latest/" title="latest" class="md-nav__link">
-      latest
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="api/.md" title="" class="md-nav__link">
       
     </a>
@@ -507,7 +500,7 @@
 
 
   <li class="md-nav__item">
-    <a href="about/license/" title="License" class="md-nav__link">
+    <a href="about/license.md" title="License" class="md-nav__link">
       License
     </a>
   </li>
@@ -534,8 +527,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jenkins-build-status" title="Jenkins Build Status" class="md-nav__link">
-    Jenkins Build Status
+  <a href="#downloads" title="Downloads" class="md-nav__link">
+    Downloads
   </a>
   
 </li>
@@ -563,102 +556,46 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/wso2-extensions/siddhi-io-sqs/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/siddhi.io/siddhi-io-sqs/blob/master/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="siddhi-io-sqs">siddhi-io-sqs<a class="headerlink" href="#siddhi-io-sqs" title="Permanent link">&para;</a></h1>
+                <h1 id="siddhi-io-sqs">Siddhi IO SQS</h1>
+<p><a href="https://wso2.org/jenkins/job/siddhi/job/siddhi-io-sqs/"><img alt="Jenkins Build Status" src="https://wso2.org/jenkins/job/siddhi/job/siddhi-io-sqs/badge/icon" /></a>
+<a href="https://github.com/siddhi-io/siddhi-io-sqs/releases"><img alt="GitHub Release" src="https://img.shields.io/github/release/siddhi-io/siddhi-io-sqs.svg" /></a>
+<a href="https://github.com/siddhi-io/siddhi-io-sqs/releases"><img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/siddhi-io/siddhi-io-sqs.svg" /></a>
+<a href="https://github.com/siddhi-io/siddhi-io-sqs/issues"><img alt="GitHub Open Issues" src="https://img.shields.io/github/issues-raw/siddhi-io/siddhi-io-sqs.svg" /></a>
+<a href="https://github.com/siddhi-io/siddhi-io-sqs/commits/master"><img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/siddhi-io/siddhi-io-sqs.svg" /></a>
+<a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a></p>
 <p>The <strong>siddhi-io-sqs extension</strong> is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> 
 that used to receive and publish events via AWS SQS Service. This extension allows users to subscribe to a SQS queue 
 and receive/publish SQS messages.</p>
-<p>Find some useful links below:</p>
+<p>For information on <a target="_blank" href="https://siddhi.io/">Siddhi</a> and it's features refer <a target="_blank" href="https://siddhi.io/redirect/docs.html">Siddhi Documentation</a>. </p>
+<h2 id="downloads">Downloads</h2>
 <ul>
-<li><a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs">Source code</a></li>
-<li><a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/releases">Releases</a></li>
-<li><a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/issues">Issue tracker</a></li>
+<li>Versions 3.x and above with group id <code>io.siddhi.extension.*</code> from <a target="_blank" href="https://mvnrepository.com/artifact/io.siddhi.extension.io.sqs/siddhi-io-sqs/">here</a>.</li>
+<li>Versions 2.x and lower with group id <code>org.wso2.extension.siddhi.</code> from  <a target="_blank" href="https://mvnrepository.com/artifact/org.wso2.extension.siddhi.io.sqs/siddhi-io-sqs">here</a>.</li>
 </ul>
-<h2 id="jenkins-build-status">Jenkins Build Status<a class="headerlink" href="#jenkins-build-status" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th align="left">Siddhi Branch</th>
-<th align="left">Jenkins Build Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">master</td>
-<td align="left"><a href="https://wso2.org/jenkins/view/wso2-dependencies/job/siddhi/job/siddhi-io-sqs"><img alt="Build Status" src="https://wso2.org/jenkins/view/wso2-dependencies/job/siddhi/job/siddhi-io-sqs/badge/icon" /></a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="latest-api-docs">Latest API Docs<a class="headerlink" href="#latest-api-docs" title="Permanent link">&para;</a></h2>
-<p>Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/api/1.1.1">1.1.1</a>.</p>
-<h1 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h1>
-<h2 id="how-to-use">How to use<a class="headerlink" href="#how-to-use" title="Permanent link">&para;</a></h2>
-<p><strong>Using the extension in <a target="_blank" href="https://github.com/wso2/product-sp">WSO2 Stream Processor</a></strong></p>
+<h2 id="latest-api-docs">Latest API Docs</h2>
+<p>Latest API Docs is <a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/3.0.0">3.0.0</a>.</p>
+<h1 id="features">Features</h1>
 <ul>
-<li>
-<p>You can use this extension in the latest <a target="_blank" href="https://github.com/wso2/product-sp/releases">WSO2 Stream Processor</a> that is a part of <a target="_blank" href="http://wso2.com/analytics?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">WSO2 Analytics</a> offering, with editor, debugger and simulation support.</p>
-</li>
-<li>
-<p>This extension is shipped by default with WSO2 Stream Processor, if you wish to use an alternative version of this extension you can replace the component <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/releases">jar</a> that can be found in the <code>&lt;STREAM_PROCESSOR_HOME&gt;/lib</code> directory.</p>
-</li>
+<li><a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0/#sqs-sink">sqs</a> <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#sink">(Sink)</a></em><br><div style="padding-left: 1em;"><p>The sqs sink pushes the events into a sqs broker using the AMQP protocol</p></div></li>
+<li><a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0/#sqs-source">sqs</a> <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#source">(Source)</a></em><br><div style="padding-left: 1em;"><p>The sqs source receives the events from the sqs broker via the AMQP protocol. </p></div></li>
 </ul>
-<p><strong>Using the extension as a <a target="_blank" href="https://wso2.github.io/siddhi/documentation/running-as-a-java-library">java library</a></strong></p>
-<ul>
-<li>This extension can be added as a maven dependency along with other Siddhi dependencies to your project.</li>
-</ul>
-<div class="codehilite"><pre><span></span>     &lt;dependency&gt;
-        &lt;groupId&gt;org.wso2.extension.siddhi.io.sqs&lt;/groupId&gt;
-        &lt;artifactId&gt;siddhi-io-sqs&lt;/artifactId&gt;
-        &lt;version&gt;x.x.x&lt;/version&gt;
-     &lt;/dependency&gt;
-</pre></div>
-
-
+<h2 id="dependencies">Dependencies</h2>
+<p>There are no other dependencies needed for this extension.</p>
+<h2 id="installation">Installation</h2>
+<p>For installing this extension on various siddhi execution environments refer Siddhi documentation section on <a target="_blank" href="https://siddhi.io/redirect/add-extensions.html">adding extensions</a>.</p>
+<h1 id="support-and-contribution">Support and Contribution</h1>
 <ul>
 <li>
-<p>Post your questions with the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag in <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a>.</p>
+<p>We encourage users to ask questions and get support via <a target="_blank" href="https://stackoverflow.com/questions/tagged/siddhi">StackOverflow</a>, make sure to add the <code>siddhi</code> tag to the issue for better response.</p>
 </li>
 <li>
-<p>Siddhi developers can be contacted via the mailing lists:</p>
-<p>Developers List   : <a href="mailto:dev@wso2.org">dev@wso2.org</a></p>
-<p>Architecture List : <a href="mailto:architecture@wso2.org">architecture@wso2.org</a></p>
+<p>If you find any issues related to the extension please report them on <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-string/issues">the issue tracker</a>.</p>
 </li>
 <li>
-<p>We are committed to ensuring support for this extension in production. Our unique approach ensures that all support leverages our open development methodology and is provided by the very same engineers who build the technology.</p>
-</li>
-<li>
-<p>For more details and to take advantage of this unique opportunity contact us via <a target="_blank" href="http://wso2.com/support?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">http://wso2.com/support/</a>.</p>
-</li>
-</ul>
-<h2 id="how-to-contribute">How to Contribute<a class="headerlink" href="#how-to-contribute" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p>Please report issues at <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/issues">GitHub Issue Tracker</a>.</p>
-</li>
-<li>
-<p>Send your contributions as pull requests to <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-sqs/tree/master">master branch</a>. </p>
-</li>
-</ul>
-<h2 id="contact-us">Contact us<a class="headerlink" href="#contact-us" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p>Post your questions with the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag in <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a>. </p>
-</li>
-<li>
-<p>Siddhi developers can be contacted via the mailing lists:</p>
-<p>Developers List   : <a href="mailto:dev@wso2.org">dev@wso2.org</a></p>
-<p>Architecture List : <a href="mailto:architecture@wso2.org">architecture@wso2.org</a></p>
-</li>
-</ul>
-<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p>We are committed to ensuring support for this extension in production. Our unique approach ensures that all support leverages our open development methodology and is provided by the very same engineers who build the technology. </p>
-</li>
-<li>
-<p>For more details and to take advantage of this unique opportunity contact us via <a target="_blank" href="http://wso2.com/support?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">http://wso2.com/support/</a>. </p>
+<p>For production support and other contribution related information refer <a target="_blank" href="https://siddhi.io/community/">Siddhi Community</a> documentation.</p>
 </li>
 </ul>
                 
@@ -682,13 +619,13 @@ and receive/publish SQS messages.</p>
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="api/1.1.1/" title="1.1.1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="api/latest/" title="latest" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                1.1.1
+                latest
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -704,7 +641,7 @@ and receive/publish SQS messages.</p>
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2011 - 2018 WSO2
+            Siddhi - Documentation
           </div>
         
         powered by
@@ -717,7 +654,11 @@ and receive/publish SQS messages.</p>
   <div class="md-footer-social">
     <link rel="stylesheet" href="assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/wso2/siddhi" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/siddhi-io/siddhi" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://medium.com/siddhi-io" class="md-footer-social__link fa fa-medium"></a>
+    
+      <a href="https://twitter.com/siddhi_io" class="md-footer-social__link fa fa-twitter"></a>
     
       <a href="https://www.linkedin.com/groups/13553064" class="md-footer-social__link fa fa-linkedin"></a>
     
@@ -729,11 +670,11 @@ and receive/publish SQS messages.</p>
       
     </div>
     
-      <script src="assets/javascripts/application.39abc4af.js"></script>
+      <script src="assets/javascripts/application.245445c6.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
       
-        <script src="javascripts/extra.js"></script>
+        <script src="assets/javascripts/extra.js"></script>
       
     
   </body>
