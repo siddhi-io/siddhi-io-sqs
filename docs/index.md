@@ -20,7 +20,7 @@ For information on <a target="_blank" href="https://siddhi.io/">Siddhi</a> and i
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0">2.0.0</a>.
+Latest API Docs is <a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/3.0.0">3.0.0</a>.
 
 # Features
 
@@ -40,4 +40,3 @@ For installing this extension on various siddhi execution environments refer Sid
 * If you find any issues related to the extension please report them on <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-string/issues">the issue tracker</a>.
 
 * For production support and other contribution related information refer <a target="_blank" href="https://siddhi.io/community/">Siddhi Community</a> documentation.
-
