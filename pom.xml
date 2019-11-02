@@ -219,7 +219,7 @@
         <carbon.feature.plugin.version>3.0.0</carbon.feature.plugin.version>
         <aws.java.sqs.sdk.version>1.11.285</aws.java.sqs.sdk.version>
         <aws.java.sqs.sdk.version.range>[1.11.285,1.12.0)</aws.java.sqs.sdk.version.range>
-        <jackson.version>2.9.0</jackson.version>
+        <jackson.version>2.10.0</jackson.version>
         <jackson.version.range>[2.9.0,3.0.0)</jackson.version.range>
         <apache.httpclient.version>4.5.5</apache.httpclient.version>
         <apache.httpclient.version.range>[4.5.0,4.6.0)</apache.httpclient.version.range>
