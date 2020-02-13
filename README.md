@@ -28,7 +28,8 @@ Latest API Docs is <a target="_blank" href="https://siddhi-io.github.io/siddhi-i
 * <a target="_blank" href="https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0/#sqs-source">sqs</a> *<a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#source">(Source)</a>*<br><div style="padding-left: 1em;"><p>The sqs source receives the events from the sqs broker via the AMQP protocol. </p></div>
 
 ## Dependencies
-There are no other dependencies needed for this extension.
+
+Before using this extension, set up SQS as described in [AWS Documentation - Setting up Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-setting-up.html).
 
 ## Installation
 For installing this extension on various siddhi execution environments refer Siddhi documentation section on <a target="_blank" href="https://siddhi.io/redirect/add-extensions.html">adding extensions</a>.

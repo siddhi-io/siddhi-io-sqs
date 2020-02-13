@@ -153,6 +153,7 @@ import java.util.concurrent.TimeUnit;
                                 "max.number.of.delete.retry.attempts='10'," +
                                 "@map(type='xml',enclosing.element=\"//events\"," +
                                 "@attributes(symbol='symbol', message_id='trp:MESSAGE_ID') ))" +
+
                                 "define stream inStream (symbol string, message_id string);",
                         description = "" +
                                 "Above example demonstrate how an SQS source is getting configured in order to " +
