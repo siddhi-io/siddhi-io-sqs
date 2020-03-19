@@ -43,11 +43,11 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * SQS Source extension.
+ * SQS_ar (Assume Role) Source extension.
  */
 
 @Extension(
-        name = "sqs",
+        name = "sqs_ar",
         namespace = "source",
         description = "SQS source allows users to connect and consume messages from a AWS SQS Queue. It has the" +
                 " ability to receive Text messages",
@@ -77,6 +77,27 @@ import java.util.concurrent.TimeUnit;
                         name = SQSConstants.REGION_NAME,
                         description = "Amazon Web Service Region",
                         type = DataType.STRING
+                ),
+                @Parameter(
+                        name = SQSConstants.ROLE_ARN_NAME,
+                        description = "Amazon Web Service Role ARN for role delegation",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "none"
+                ),
+                @Parameter(
+                        name = SQSConstants.ROLE_SESSION_NAME,
+                        description = "Amazon Web Service Role Session Name for role delegation",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "none"
+                ),
+                @Parameter(
+                        name = SQSConstants.USE_DELEGATION_NAME,
+                        description = "Enable Role Delegation",
+                        type = DataType.BOOL,
+                        optional = true,
+                        defaultValue = "" + SQSConstants.DEFAULT_USE_DELEGATION
                 ),
                 @Parameter(
                         name = SQSConstants.POLLING_INTERVAL_NAME,
@@ -112,7 +133,7 @@ import java.util.concurrent.TimeUnit;
                         description = "Should the message be deleted from the queue after consuming it.",
                         type = DataType.BOOL,
                         optional = true,
-                        defaultValue = "" + SQSConstants.DELETE_MESSAGES_NAME
+                        defaultValue = "" + SQSConstants.DEFAULT_DELETE_AFTER_CONSUME
                 ),
                 @Parameter(
                         name = SQSConstants.DELETE_RETRY_INTERVAL_NAME,
@@ -138,10 +159,13 @@ import java.util.concurrent.TimeUnit;
         },
         examples = {
                 @Example(
-                        syntax = "@source(type='sqs'," +
+                        syntax = "@source(type='sqs_ar'," +
                                 "queue='http://aws.sqs.queue.url'," +
                                 "access.key='aws.access.key'," +
                                 "secret.key='aws.secret.key'," +
+                                "use.delegation='true'," +
+                                "role.arn='arn:aws:iam::123456789012:role/some-role-name'," +
+                                "role.session.name='some-session-name'," +
                                 "region='us-east-2'," +
                                 "polling.interval='5000'," +
                                 "max.number.of.messages='10'," +
@@ -156,10 +180,13 @@ import java.util.concurrent.TimeUnit;
 
                                 "define stream inStream (symbol string, message_id string);",
                         description = "" +
-                                "Above example demonstrate how an SQS source is getting configured in order to " +
+                                "Above example demonstrate how an SQS source "
+                                + "is getting configured in order to " +
                                 "consume messages from an SQS queue.\n" +
-                                "SQS source will establish the connection to a queue using given configurations and " +
-                                "start consuming xml messages from the queue.\n" +
+                                "SQS source will establish the connection to a queue "
+                                + "using given the provided long term credentials and " +
+                                "use them to get temporary, hosrt-term credentials to "
+                                + "start consuming xml messages from the queue.\n" +
                                 "Once a message is received by the source from the given queue, 'xml' mapper will " +
                                 "generate a siddhi event from that message and pass it to the inStream."
                 )
@@ -203,6 +230,16 @@ public class SQSSource extends Source {
             throw new SiddhiAppValidationException("Access key and Secret key are mandatory parameters" +
                     " for the SQS client");
         }
+        
+        // START Customisation to support delegation (a.k.a. "Assume Role")
+        if (this.sourceConfig.getRoleArn() == null || sourceConfig.getRoleArn().isEmpty()) {
+            this.sourceConfig.setRoleArn(configReader.readConfig(SQSConstants.ROLE_ARN_NAME, null));
+        }
+        
+        if (this.sourceConfig.getRoleSessionName() == null || sourceConfig.getRoleSessionName().isEmpty()) {
+            this.sourceConfig.setRoleSessionName(configReader.readConfig(SQSConstants.ROLE_SESSION_NAME, null));
+        }
+        // END Customisation to support delegation (a.k.a. "Assume Role")
 
         scheduledExecutorService = siddhiAppContext.getScheduledExecutorService();
         this.sourceEventListener = sourceEventListener;

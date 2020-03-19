@@ -28,6 +28,10 @@ public class SQSConstants {
     public static final String SECRET_KEY_NAME = "secret.key";
     public static final String REGION_NAME = "region";
     public static final String QUEUE_URL_NAME = "queue";
+    // Customisation to support delegation (a.k.a. "Assume Role")
+    public static final String ROLE_ARN_NAME = "role.arn";
+    public static final String ROLE_SESSION_NAME = "role.session.name";
+    public static final String USE_DELEGATION_NAME = "use.delegation";
 
     // Option parameter names for source
     public static final String POLLING_INTERVAL_NAME = "polling.interval";
@@ -62,6 +66,10 @@ public class SQSConstants {
 
     // HTTP Constants
     public static final int HTTP_SUCCESS = 200;
+    
+    // Customisation to support delegation (a.k.a. "Assume Role")
+    public static final boolean DEFAULT_USE_DELEGATION = false;
+    
 
     private SQSConstants() {
     }

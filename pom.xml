@@ -103,7 +103,12 @@
                 <artifactId>aws-java-sdk-sqs</artifactId>
                 <version>${aws.java.sqs.sdk.version}</version>
             </dependency>
-
+            <!-- Additional dependency for AWS Role Delegation -->
+	        <dependency>
+	            <groupId>com.amazonaws</groupId>
+	            <artifactId>aws-java-sdk-sts</artifactId>
+	            <version>${aws.java.sqs.sdk.version}</version>
+	        </dependency>
             <!--3rd party dependencies for sqs-sdk-->
 
             <dependency>
@@ -217,12 +222,29 @@
         <siddhi.map.xml.version>5.0.3</siddhi.map.xml.version>
         <jacoco.plugin.version>0.7.9</jacoco.plugin.version>
         <carbon.feature.plugin.version>3.0.0</carbon.feature.plugin.version>
-        <aws.java.sqs.sdk.version>1.11.285</aws.java.sqs.sdk.version>
-        <aws.java.sqs.sdk.version.range>[1.11.285,1.12.0)</aws.java.sqs.sdk.version.range>
         <jackson.version>2.10.1</jackson.version>
         <jackson.version.range>[2.9.0,3.0.0)</jackson.version.range>
-        <apache.httpclient.version>4.5.5</apache.httpclient.version>
-        <apache.httpclient.version.range>[4.5.0,4.6.0)</apache.httpclient.version.range>
+        
+        <!-- Additional OSGi bundles versions -->
+        <netty.version>4.1.47.Final</netty.version>
+        <aws-java-sdk-osgi.version>1.11.744</aws-java-sdk-osgi.version>
+        
+        <!-- Updated Amazon SDK version -->
+        <aws.java.sqs.sdk.version>1.11.744</aws.java.sqs.sdk.version>
+        <aws.java.sqs.sdk.version.range>[1.11.744,1.12.0)</aws.java.sqs.sdk.version.range>
+        
+        <!-- 
+            The following bundles will have to be added to the folder 
+            where OSGi bundles are put, because the product versions are older and
+            not supported by the latest AWS Sdk versions:
+            - httpclient-osgi-${apache.httpclient.version}.jar
+            - httpcore-osgi-${apache.httpclient.core.version}.jar
+        -->
+        <apache.httpclient.version>4.5.12</apache.httpclient.version>
+        <apache.httpclient.version.range>[4.5.10,4.6.0)</apache.httpclient.version.range>
+        <apache.httpclient.core.version>4.4.13</apache.httpclient.core.version>
+        <apache.httpclient.core.version.range>[4.4.13,4.5.0)</apache.httpclient.core.version.range>
+        
         <apache.commons.version>1.10</apache.commons.version>
         <apache.commons.version.range>[1.10.0,2.0.0)</apache.commons.version.range>
         <joda.time.version>2.3</joda.time.version>
