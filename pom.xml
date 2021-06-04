@@ -221,7 +221,7 @@
         <aws.java.sqs.sdk.version.range>[1.11.285,1.12.0)</aws.java.sqs.sdk.version.range>
         <jackson.version>2.10.1</jackson.version>
         <jackson.version.range>[2.9.0,3.0.0)</jackson.version.range>
-        <apache.httpclient.version>4.5.5</apache.httpclient.version>
+        <apache.httpclient.version>4.5.13</apache.httpclient.version>
         <apache.httpclient.version.range>[4.5.0,4.6.0)</apache.httpclient.version.range>
         <apache.commons.version>1.10</apache.commons.version>
         <apache.commons.version.range>[1.10.0,2.0.0)</apache.commons.version.range>
