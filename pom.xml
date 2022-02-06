@@ -210,7 +210,7 @@
     </scm>
 
     <properties>
-        <siddhi.version>5.1.21-SNAPSHOT</siddhi.version>
+        <siddhi.version>5.1.21</siddhi.version>
         <log4j.version>2.17.1</log4j.version>
         <carbon.transport.version>4.4.15</carbon.transport.version>
         <siddhi.map.json.version>5.2.2-SNAPSHOT</siddhi.map.json.version>
