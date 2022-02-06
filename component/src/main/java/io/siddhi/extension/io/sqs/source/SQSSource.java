@@ -34,7 +34,8 @@ import io.siddhi.core.util.transport.OptionHolder;
 import io.siddhi.extension.io.sqs.api.SQSBuilder;
 import io.siddhi.extension.io.sqs.util.SQSConstants;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +168,7 @@ import java.util.concurrent.TimeUnit;
 )
 // for more information refer https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sources
 public class SQSSource extends Source {
-    private static final Logger logger = Logger.getLogger(SQSSource.class);
+    private static final Logger logger = LogManager.getLogger(SQSSource.class);
     private ScheduledExecutorService scheduledExecutorService;
     private SQSSourceConfig sourceConfig;
     private SourceEventListener sourceEventListener;

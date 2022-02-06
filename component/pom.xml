@@ -46,8 +46,8 @@
             <artifactId>siddhi-query-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.log4j.wso2</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -230,7 +230,6 @@
                             com.amazonaws.*;version="${aws.java.sqs.sdk.version.range}",
                             io.siddhi.annotation.*;version="${siddhi.version.range}",
                             io.siddhi.core.*;version="${siddhi.version.range}",
-                            org.apache.log4j.*,
                             io.siddhi.query.api.exception.*;version="${siddhi.version.range}",
                             io.siddhi.core.exception.*;version="${siddhi.version.range}",
                             io.siddhi.core.stream.input.source.*;version="${siddhi.version.range}",
