@@ -27,7 +27,8 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import io.siddhi.core.stream.input.source.SourceEventListener;
 import io.siddhi.extension.io.sqs.util.SQSConstants;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ import java.util.List;
  * Runnable Task for polling from the queue.
  */
 public class SQSSourceTask implements Runnable {
-    private static final Logger logger = Logger.getLogger(SQSSourceTask.class);
+    private static final Logger logger = LogManager.getLogger(SQSSourceTask.class);
 
     private ReceiveMessageRequest messageRequest;
     private AmazonSQS amazonSQS;
