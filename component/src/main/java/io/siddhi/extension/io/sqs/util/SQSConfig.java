@@ -31,6 +31,33 @@ public class SQSConfig {
     private String secretKey;
     private String queueUrl;
     private String region;
+    private boolean useDelegation = Boolean.FALSE.booleanValue();
+    private String roleArn;
+    private String roleSessionName;
+    
+    public boolean isDelegationEnabled() {
+        return useDelegation;
+    }
+
+    public void setUseDelegation(boolean useDelegation) {
+        this.useDelegation = useDelegation;
+    }
+
+    public String getRoleArn() {
+        return roleArn;
+    }
+
+    public void setRoleArn(String roleArn) {
+        this.roleArn = roleArn;
+    }
+
+    public String getRoleSessionName() {
+        return roleSessionName;
+    }
+
+    public void setRoleSessionName(String roleSessionName) {
+        this.roleSessionName = roleSessionName;
+    }
 
     public String getAccessKey() {
         return accessKey;

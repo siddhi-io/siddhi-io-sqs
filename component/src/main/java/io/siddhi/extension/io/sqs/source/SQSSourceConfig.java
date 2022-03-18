@@ -54,6 +54,17 @@ public class SQSSourceConfig extends SQSConfig {
                 case SQSConstants.REGION_NAME:
                     super.setRegion(optionHolder.validateAndGetStaticValue(key));
                     break;
+                // START Customisation to support delegation (a.k.a. "Assume Role")
+                case SQSConstants.USE_DELEGATION_NAME:
+                    super.setUseDelegation(getBooleanValue(optionHolder, key));
+                    break;
+                case SQSConstants.ROLE_ARN_NAME:
+                    super.setRoleArn(optionHolder.validateAndGetStaticValue(key));
+                    break;    
+                case SQSConstants.ROLE_SESSION_NAME:
+                    super.setRoleSessionName(optionHolder.validateAndGetStaticValue(key));
+                    break;
+                // END Customisation to support delegation (a.k.a. "Assume Role")
                 case SQSConstants.WAIT_TIME_NAME:
                     this.waitTime = getIntegerOptionValue(optionHolder, key);
                     break;

@@ -68,8 +68,109 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-sqs</artifactId>
-            <version>${aws.java.sqs.sdk.version.range}</version>
         </dependency>
+        <!-- Additional dependency for AWS Role Delegation -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-sts</artifactId>
+        </dependency>
+
+        <!-- These are OSGi bundles that might be useful to avoid embedding them in dependant jars
+             The only ones that are required for this project are  
+             - httpclient-osgi-4.5.12.jar
+             - httpcore-osgi-4.4.13.jar
+             
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-osgi</artifactId>
+            <version>${aws-java-sdk-osgi.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-cbor</artifactId>
+            <version>${jackson.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-common</artifactId>
+            <version>${netty.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport</artifactId>
+            <version>${netty.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-buffer</artifactId>
+            <version>${netty.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver</artifactId>
+            <version>${netty.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec</artifactId>
+            <version>${netty.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http</artifactId>
+            <version>${netty.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-handler</artifactId>
+            <version>${netty.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.ion</groupId>
+            <artifactId>ion-java</artifactId>
+            <version>1.5.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-osgi</artifactId>
+            <version>${apache.httpclient.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-osgi</artifactId>
+            <version>${apache.httpclient.core.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
 
         <!--3rd party dependencies for sqs sdk-->
         <dependency>
@@ -209,11 +310,12 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <!-- We need a recent version of org.apache.http.* so we add the version range -->
                         <Private-Package>
                             com.amazonaws.*,
                             com.fasterxml.jackson.core.*,
                             com.fasterxml.jackson.dataformat.cbor.*,
-                            org.apache.http.*,
+                            org.apache.http.*;version="[4.4.12,4.5.0)",
                             org.apache.commons.codec.*,
                             org.joda.time.*,
                             org.joda.convert.*,
@@ -226,7 +328,20 @@
                         <Export-Package>
                             io.siddhi.extension.io.sqs.*;version="${project.version}",
                         </Export-Package>
+                        <!-- We need to import the latest org.apache.http.* packages -->
                         <Import-Package>
+            org.apache.http.auth.*;version="${apache.httpclient.version.range}",
+            org.apache.http.cookie.*;version="${apache.httpclient.version.range}",
+            org.apache.http.conn.*;version="${apache.httpclient.version.range}",
+            org.apache.http.client.*;version="${apache.httpclient.version.range}",
+            org.apache.http.entity.mime.*;version="${apache.httpclient.version.range}",
+            org.apache.http.entity.mime.content.*;version="${apache.httpclient.version.range}",
+            org.apache.http.impl.auth.*;version="${apache.httpclient.version.range}",
+            org.apache.http.impl.cookie.*;version="${apache.httpclient.version.range}",
+            org.apache.http.impl.conn.*;version="${apache.httpclient.version.range}",
+            org.apache.http.impl.execchain.*;version="${apache.httpclient.version.range}",
+            org.apache.http.impl.client.*;version="${apache.httpclient.version.range}",
+            org.apache.http.osgi.services.*;version="${apache.httpclient.version.range}",
                             com.amazonaws.*;version="${aws.java.sqs.sdk.version.range}",
                             io.siddhi.annotation.*;version="${siddhi.version.range}",
                             io.siddhi.core.*;version="${siddhi.version.range}",

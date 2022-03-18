@@ -37,11 +37,11 @@ import io.siddhi.query.api.definition.StreamDefinition;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
 
 /**
- * SQS Sink Extension
+ * SQS_ar (Assume Role) Sink Extension
  */
 
 @Extension(
-        name = "sqs",
+        name = "sqs_ar",
         namespace = "sink",
         description = "SQS sink allows users to connect and publish messages to an AWS SQS Queue. It has the" +
                 " ability to only publish Text messages",
@@ -73,6 +73,27 @@ import io.siddhi.query.api.exception.SiddhiAppValidationException;
                         type = DataType.STRING
                 ),
                 @Parameter(
+                        name = SQSConstants.ROLE_ARN_NAME,
+                        description = "Amazon Web Service Role ARN for role delegation",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "none"
+                ),
+                @Parameter(
+                        name = SQSConstants.ROLE_SESSION_NAME,
+                        description = "Amazon Web Service Role Session Name for role delegation",
+                        type = DataType.STRING,
+                        optional = true,
+                        defaultValue = "none"
+                ),
+                @Parameter(
+                        name = SQSConstants.USE_DELEGATION_NAME,
+                        description = "Enable Role Delegation",
+                        type = DataType.BOOL,
+                        optional = true,
+                        defaultValue = "" + SQSConstants.DEFAULT_USE_DELEGATION
+                ),
+                @Parameter(
                         name = SQSConstants.MESSAGE_GROUP_ID_NAME,
                         description = "ID of the group that the message belong to(only applicable for FIFO Queues)",
                         type = DataType.STRING,
@@ -100,10 +121,13 @@ import io.siddhi.query.api.exception.SiddhiAppValidationException;
         },
         examples = {
                 @Example(
-                        syntax = "@sink(type='sqs'," +
+                        syntax = "@sink(type='sqs_ar'," +
                                 "queue='https://amazon.sqs.queue.url'," +
                                 "access.key='aws.access.key'," +
                                 "secret.key='aws.secret.key'," +
+                                "use.delegation='true'," +
+                                "role.arn='arn:aws:iam::123456789012:role/some-role-name'," +
+                                "role.session.name='some-session-name'," +
                                 "region='us-east-1'," +
                                 "delay.interval='5'," +
                                 "message.group.id='group-1',@map(type='xml') )" +
@@ -116,10 +140,13 @@ import io.siddhi.query.api.exception.SiddhiAppValidationException;
                                 "queue using provided configurations and send the message to the queue.\n"
                 ),
                 @Example(
-                        syntax = "@sink(type='sqs'," +
+                        syntax = "@sink(type='sqs_ar'," +
                                 "queue='https://amazon.sqs.queue.fifo'," +
                                 "access.key='aws.access.key'," +
                                 "secret.key='aws.secret.key'," +
+                                "use.delegation='true'," +
+                                "role.arn='arn:aws:iam::123456789012:role/some-role-name'," +
+                                "role.session.name='some-session-name'," +
                                 "region='us-east-1'," +
                                 "delay.interval='5'," +
                                 "deduplication.id='{{deduplicationID}}'," +
@@ -204,6 +231,17 @@ public class SQSSink extends Sink {
             throw new SiddhiAppValidationException("Access key and Secret key are mandatory parameters for" +
                     " the SQS client");
         }
+        
+        // START Customisation to support delegation (a.k.a. "Assume Role")
+        if (this.sinkConfig.getRoleArn() == null || sinkConfig.getRoleArn().isEmpty()) {
+            this.sinkConfig.setRoleArn(configReader.readConfig(SQSConstants.ROLE_ARN_NAME, null));
+        }
+        
+        if (this.sinkConfig.getRoleSessionName() == null || sinkConfig.getRoleSessionName().isEmpty()) {
+            this.sinkConfig.setRoleSessionName(configReader.readConfig(SQSConstants.ROLE_SESSION_NAME, null));
+        }
+        // END Customisation to support delegation (a.k.a. "Assume Role")
+        
         return null;
     }
 
