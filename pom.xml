@@ -79,6 +79,11 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.siddhi.extension.map.xml</groupId>
                 <artifactId>siddhi-map-xml</artifactId>
                 <version>${siddhi.map.xml.version}</version>
@@ -233,6 +238,7 @@
         <software.amazon.ion.version.range>[1.0.0,2.0.0)</software.amazon.ion.version.range>
         <apache.commons.logging.version>1.2</apache.commons.logging.version>
         <apache.commons.logging.version.range>[1.2,1.3)</apache.commons.logging.version.range>
+        <log4j.version.range>[2.17.0,3.0.0)</log4j.version.range>
         <mockito.version>2.8.9</mockito.version>
         <mockito.version.range>[2.8.9,2.9.0)</mockito.version.range>
         <junit.version>4.12</junit.version>

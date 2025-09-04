@@ -50,6 +50,10 @@
             <artifactId>log4j-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
         </dependency>
@@ -227,12 +231,14 @@
                             io.siddhi.extension.io.sqs.*;version="${project.version}",
                         </Export-Package>
                         <Import-Package>
+                            org.apache.logging.log4j.*;version="${log4j.version.range}",
                             com.amazonaws.*;version="${aws.java.sqs.sdk.version.range}",
                             io.siddhi.annotation.*;version="${siddhi.version.range}",
                             io.siddhi.core.*;version="${siddhi.version.range}",
                             io.siddhi.query.api.exception.*;version="${siddhi.version.range}",
                             io.siddhi.core.exception.*;version="${siddhi.version.range}",
                             io.siddhi.core.stream.input.source.*;version="${siddhi.version.range}",
+                            io.siddhi.core.stream.output.sink.*;version="${siddhi.version.range}",
                         </Import-Package>
                         <Include-Resource>
                             META-INF=target/classes/META-INF
